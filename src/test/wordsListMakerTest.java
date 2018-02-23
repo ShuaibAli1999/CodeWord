@@ -1,3 +1,4 @@
+package test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.FileNotFoundException;
@@ -5,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
+
+import code.wordsListMaker;
 
 public class wordsListMakerTest {
 
