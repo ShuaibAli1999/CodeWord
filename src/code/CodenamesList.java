@@ -16,11 +16,10 @@ public class CodenamesList{
 		wordsListMaker list =  new wordsListMaker();
 		originalList = list.getList();
 		String transferWord = "";
-
-//		retVal.add(originalList.get(0));
+		retVal=new ArrayList<>();
+		retVal.add(originalList.get(0));
 
 		return originalList;
-		
 	}
 
 }

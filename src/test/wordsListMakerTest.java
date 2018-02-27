@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import code.wordsListMaker;
 
 public class wordsListMakerTest {
 
 
-@Test
+ @Test
 public void listCheckerTest() throws FileNotFoundException, IOException {
 	ArrayList<String> test = new ArrayList<String>();
 	wordsListMaker  l=  new wordsListMaker();
