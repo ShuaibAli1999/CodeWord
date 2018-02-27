@@ -35,6 +35,4 @@ public ArrayList<String> getList() {
 	return words;
 }
 
-
-
 }
