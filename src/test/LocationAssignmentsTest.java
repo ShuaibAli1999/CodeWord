@@ -24,7 +24,10 @@ public class LocationAssignmentsTest{
 	a.gameStarted(c, p);
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
+	HashMap<String, String> map=a.getAssignedCodeNameandValues();
+	ArrayList<String> person=a.getperson();
 	assertEquals("does not getting the correct names",l[0][0].getName(),a.getcodename().get(0));
+	assertEquals("does not getting the correct names",map.get(a.getcodename().get(0)),person.get(0));// checking if there is a person matching to the codenames.
 	}
 	
 	@Test
@@ -35,7 +38,10 @@ public class LocationAssignmentsTest{
 	a.gameStarted(c, p);
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
+	HashMap<String, String> map=a.getAssignedCodeNameandValues();
+	ArrayList<String> person=a.getperson();
 	assertEquals("does not getting the correct names",l[0][1].getName(),a.getcodename().get(1));
+	assertEquals("does not getting the correct names",map.get(a.getcodename().get(1)),person.get(1));
 	}
 	
 	@Test
