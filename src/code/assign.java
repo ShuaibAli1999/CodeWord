@@ -13,6 +13,9 @@ public class assign {
 	private HashMap<String,String>assginedCodeName;
 	private HashMap<String,Boolean> Reveal;
 	private int turns=1;//1 is red team's turn, -1 is blue team's turn.
+	private int turnCount = 1;
+	private int count2red=0;
+	private int count2blue=0;
 	private Location[][] board=new Location[5][5];
 	
 	public void setCodenames(ArrayList<String>codename){
@@ -81,7 +84,7 @@ public class assign {
 	}
 	
 	public boolean clue(String aClue) {
-		String[] x= aClue.split("[ \t\n¡ª-]");//try to separate the sentence into words.
+		String[] x= aClue.split("[ \t\nï¿½ï¿½-]");//try to separate the sentence into words.
 		boolean legal=true;
 		for(String s:x) {
 			for(String c:Reveal.keySet()) {
@@ -116,6 +119,43 @@ public class assign {
 	public HashMap<String,Boolean> getReveal(){
 		return Reveal;
 	}
+	public int winningState() {
+		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
+		int count1blue = 0;
 		
+		int count1red = 0;
+		
+		
+		for(String code: Reveal.keySet()) {
+			if(Reveal.get(code)) {//iteration through hashmap to see which code names are associated with a true value
+				if(assginedCodeName.get(code)=="assassin") { // iteration through hashmap to see which role is associated with revealed code name 
+					return 0; //return 0 means turn needs to be checked to find winner
+				}
+				if(assginedCodeName.get(code)=="blue agent") {
+					count1blue++;
+					if(count1blue==8) {
+						return 1;//return 1 means game is in winning state and blue wins
+					}
+				}
+				if(assginedCodeName.get(code)=="red agent") {
+					count1red++;
+					if(count1red==9) {
+						return -1;// return -1 means game is in winning state and red wins
+					}
+				}
+			}
+			
+			
+		}
+		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
+				turnCount++;
+			}
+			if(playerTurn==0 && count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
+				turnCount++;
+			}
+			count2red = count1red;
+			count2blue = count1blue;
+		return 10;//means board not in game winning state
+	}
 	}
 	
