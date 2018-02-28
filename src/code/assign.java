@@ -35,7 +35,7 @@ public class assign {
 		setCodenames(cod.getList());
 		setPerson(per.getList());
 		assignCodeName(codenames,person);
-		board=namesOnBoard(assginedCodeName);
+		board=namesOnBoard(codenames);
 	}
 	
 	public void  assignCodeName(ArrayList<String>codename,ArrayList<String>agents){//map each codenames to the person.
@@ -54,19 +54,14 @@ public class assign {
 	//	turns=-1;
 	//}
 	
-	public Location[][] namesOnBoard(HashMap<String,String>assginedCodeName){
-		HashMap<String,String> coe=new HashMap<String,String>();
-		coe=assginedCodeName;
-		ArrayList<String> code=new ArrayList<String>();
+	public Location[][] namesOnBoard(ArrayList<String>codename){
+		
 		Location[][] l=new Location[5][5];
-		for(String x:coe.keySet()) {
-			code.add(x);
-		}
 		int indexInCode=0;//index in the arraylist of the hashmap keset which are the unreveal codenames.
 		for(int i=0;i<l.length;i++) {//loop and get the codename to show on the board.
 			for(int j=0;j<l[0].length;j++) {
 				if(indexInCode<25) {
-					l[i][j]=new Location(code.get(indexInCode));
+					l[i][j]=new Location(codename.get(indexInCode));
 					indexInCode=indexInCode+1;
 				}
 			}
