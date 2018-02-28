@@ -50,9 +50,15 @@ public class assign {
 		}	
 	}
 	
-	//public void selected() {
-	//	turns=-1;
-	//}
+	public void selected(Location theLocationThatSelected) {
+		if(turns==1) {//make sure each time is turn for different turn.
+		turns=-1;
+		}
+		else if(turns==-1){
+		turns=1;
+		}
+		Reveal.put(theLocationThatSelected.getName(), true); //make the boolean to true which means that the codename is revealed.
+	}
 	
 	public Location[][] namesOnBoard(ArrayList<String>codename){
 		
@@ -83,6 +89,12 @@ public class assign {
 					legal=true;
 				}
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
+					if(turns==1) {//if clue is illegal then the team's turn is forfeit
+						turns=-1;
+						}
+					else if(turns==-1){//should remember to call to update the frame and call observer()
+						turns=1;
+						}
 					return false;
 				}
 				if(s.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
