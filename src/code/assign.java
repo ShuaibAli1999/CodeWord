@@ -16,7 +16,13 @@ public class assign {
 	private int turnCount = 1;
 	private int count2red=0;
 	private int count2blue=0;
+	private int redTotal;
+	private int blueTotal;
 	private Location[][] board=new Location[5][5];
+	public assign() {
+		redTotal = 9;
+		blueTotal = 8;
+	}
 	
 	public void setCodenames(ArrayList<String>codename){
 		this.codenames=codename;
@@ -62,7 +68,31 @@ public class assign {
 		}
 		Reveal.put(theLocationThatSelected.getName(), true); //make the boolean to true which means that the codename is revealed.
 	}
-	
+	public boolean updateLocation(Location theLocation) {
+		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
+		if(turnCount%2!= 0) {//if it is reds turn
+		if(assginedCodeName.get(theLocation.getName())=="red agent") {
+			redTotal--;//decrement total red agents
+			return true;
+		}
+		else if(assginedCodeName.get(theLocation.getName())=="blue agent") {
+			blueTotal--;//decrement total blue agents
+			return false;
+		}
+		}
+		if(turnCount%2== 0) {
+			if(assginedCodeName.get(theLocation.getName())=="blue agent") {
+				redTotal--;
+				return true;
+			}
+			else if(assginedCodeName.get(theLocation.getName())=="red agent") {
+				blueTotal--;
+				return false;
+			}
+		}
+		return false;
+		
+	}
 	public Location[][] namesOnBoard(ArrayList<String>codename){
 		
 		Location[][] l=new Location[5][5];
@@ -118,6 +148,12 @@ public class assign {
 	
 	public HashMap<String,Boolean> getReveal(){
 		return Reveal;
+	}
+	public int getRedTotal() {
+		return redTotal;
+	}
+	public int getBlueTotal() {
+		return blueTotal;
 	}
 	public int winningState() {
 		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
