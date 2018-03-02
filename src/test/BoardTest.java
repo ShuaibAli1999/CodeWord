@@ -14,6 +14,8 @@ public void createBoardTest() {
 	Board b = new Board();
 	b.createBoard();
 	assertNotNull(b);
+	assertEquals(5, b.getArray().length);
+	assertEquals(5, b.getArray()[0].length);
 }
 	
 	

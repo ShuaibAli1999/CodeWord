@@ -9,8 +9,6 @@ public Board() {
 }
 Location[][] b = new Location[row][col];
 public void createBoard() {
-	
-	
 	for(int i=0;i<row;i++) {
 		for(int j=0;j<row;j++) {;
 			b[i][j] = new Location(null);
@@ -21,6 +19,12 @@ public void createBoard() {
 public Location getLoc(int x, int y){
 	return b[x][y];
 }
+
+public Location[][] getArray() {
+	return b;
+}
+
+
 }
 
 
