@@ -1,10 +1,7 @@
 package test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -27,7 +24,7 @@ public class LocationAssignmentsTest{
 	HashMap<String, String> map=a.getAssignedCodeNameandValues();
 	ArrayList<String> person=a.getperson();
 	assertEquals("does not getting the correct names",l[0][0].getName(),a.getcodename().get(0));
-	assertEquals("does not getting the correct names",map.get(a.getcodename().get(0)),person.get(0));// checking if there is a person matching to the codenames.
+	assertEquals("there is no person map to this codename",map.get(a.getcodename().get(0)),person.get(0));// checking if there is a person matching to the codenames.
 	}
 	
 	@Test
@@ -41,7 +38,21 @@ public class LocationAssignmentsTest{
 	HashMap<String, String> map=a.getAssignedCodeNameandValues();
 	ArrayList<String> person=a.getperson();
 	assertEquals("does not getting the correct names",l[0][1].getName(),a.getcodename().get(1));
-	assertEquals("does not getting the correct names",map.get(a.getcodename().get(1)),person.get(1));
+	assertEquals("there is no person map to this codename",map.get(a.getcodename().get(1)),person.get(1));
+	}
+	
+	@Test
+	public void locationAssignments3() throws FileNotFoundException, IOException{
+	assign a=new assign();
+	CodenamesList c=new CodenamesList();
+	PersonAssignments p=new PersonAssignments();
+	a.gameStarted(c, p);
+	Location[][] l=new Location[5][5];
+	l=a.getBoard();
+	HashMap<String, String> map=a.getAssignedCodeNameandValues();
+	ArrayList<String> person=a.getperson();
+	assertEquals("does not getting the correct names",l[4][4].getName(),a.getcodename().get(24));//check for last term.
+	assertEquals("there is no person map to this codename",map.get(a.getcodename().get(24)),person.get(24));// checking if there is a person matching to the codenames.
 	}
 	
 	@Test

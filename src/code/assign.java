@@ -24,10 +24,10 @@ public class assign {
 		blueTotal = 8;
 	}
 	
-	public void setCodenames(ArrayList<String>codename){
+	private void setCodenames(ArrayList<String>codename){
 		this.codenames=codename;
 	}
-	public void setPerson(ArrayList<String>person) {
+	private void setPerson(ArrayList<String>person) {
 		this.person=person;
 	}
 	public ArrayList<String> getcodename(){
@@ -48,7 +48,7 @@ public class assign {
 		board=namesOnBoard(codenames);
 	}
 	
-	public void  assignCodeName(ArrayList<String>codename,ArrayList<String>agents){//map each codenames to the person.
+	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>agents){//map each codenames to the person.
 		HashMap<String, String> assgin=new HashMap<String,String>();
 		for(int i=0;i<codename.size();i++) {
 			assgin.put(codename.get(i),agents.get(i));
@@ -95,7 +95,7 @@ public class assign {
 		
 	}
 	
-	public Location[][] namesOnBoard(ArrayList<String>codename){
+	private Location[][] namesOnBoard(ArrayList<String>codename){
 		
 		Location[][] l=new Location[5][5];
 		int indexInCode=0;//index in the arraylist of the hashmap keset which are the unreveal codenames.
