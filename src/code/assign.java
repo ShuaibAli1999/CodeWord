@@ -12,7 +12,7 @@ public class assign {
 	private ArrayList<String>person=new ArrayList<String>();
 	private HashMap<String,String>assginedCodeName;
 	private HashMap<String,Boolean> Reveal;
-	private int turns=0;//1 is red team's turn, -1 is blue team's turn.
+	private int turns=1;//1 is red team's turn, -1 is blue team's turn.
 	private int turnCount = 1;
 	private int count2red=0;
 	private int count2blue=0;
@@ -158,7 +158,7 @@ public class assign {
 		return blueTotal;
 	}
 	public int winningState() {
-		int playerTurn = turnCount%2;// if player turn equals 0 it is red's turn. if player turn equals 1 it is blue's turn
+		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
 		int count1blue = 0;
 		int count1red = 0;
 		for(String code: Reveal.keySet()) {
