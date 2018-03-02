@@ -115,8 +115,8 @@ public class assign {
 		return num;
 	}
 	
-	public boolean clue(String aClue) {
-		String[] x= aClue.split("[ \t\n��-]");//try to separate the sentence into words.
+	public boolean clue(String aClue) {//passing in one word and one number for a clue, separate by comma.
+		String[] x= aClue.split(",");//try to separate the sentence into words.
 		boolean legal=true;
 		for(String s:x) {
 			for(String c:Reveal.keySet()) {

@@ -70,7 +70,7 @@ public class LocationAssignmentsTest{
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
 	a.gameStarted(c, p);
-	String x="It is a location.";
+	String x="location,3";
 	assertTrue(a.clue(x));
 	}
 	
@@ -80,7 +80,7 @@ public class LocationAssignmentsTest{
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
 	a.gameStarted(c, p);
-	String x="You should choose "+a.getcodename().get(1);
+	String x=a.getcodename().get(1)+",5";
 	assertFalse(a.clue(x));
 	}
 	
@@ -93,7 +93,7 @@ public class LocationAssignmentsTest{
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	a.selected(l[0][1]);
-	String x="You should choose "+a.getcodename().get(1);
+	String x=a.getcodename().get(1)+",7";
 	assertTrue(a.clue(x));
 	}
 	
