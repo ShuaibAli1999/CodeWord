@@ -193,5 +193,6 @@ public class assign {
 			count2blue = count1blue;
 		return 10;//means board not in game winning state
 	}
+	
 	}
 	
