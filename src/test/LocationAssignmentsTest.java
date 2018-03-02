@@ -85,4 +85,13 @@ public class LocationAssignmentsTest{
 	String x="You should choose "+a.getcodename().get(1);
 	assertTrue(a.clue(x));
 	}
+	
+	@Test
+	public void teamWon() throws FileNotFoundException, IOException{//test when assassin is revealed
+	assign a=new assign();
+	CodenamesList c=new CodenamesList();
+	PersonAssignments p=new PersonAssignments();
+	a.gameStarted(c, p);
+	
+	}
 }

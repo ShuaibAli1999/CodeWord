@@ -12,7 +12,7 @@ public class assign {
 	private ArrayList<String>person=new ArrayList<String>();
 	private HashMap<String,String>assginedCodeName;
 	private HashMap<String,Boolean> Reveal;
-	private int turns=1;//1 is red team's turn, -1 is blue team's turn.
+	private int turns=0;//1 is red team's turn, -1 is blue team's turn.
 	private int turnCount = 1;
 	private int count2red=0;
 	private int count2blue=0;
@@ -38,6 +38,7 @@ public class assign {
 	}
 	
 	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
+		
 		turns=1;//red team's turn
 		assginedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
@@ -93,6 +94,7 @@ public class assign {
 		return false;
 		
 	}
+	
 	public Location[][] namesOnBoard(ArrayList<String>codename){
 		
 		Location[][] l=new Location[5][5];
@@ -156,12 +158,9 @@ public class assign {
 		return blueTotal;
 	}
 	public int winningState() {
-		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
+		int playerTurn = turnCount%2;// if player turn equals 0 it is red's turn. if player turn equals 1 it is blue's turn
 		int count1blue = 0;
-		
 		int count1red = 0;
-		
-		
 		for(String code: Reveal.keySet()) {
 			if(Reveal.get(code)) {//iteration through hashmap to see which code names are associated with a true value
 				if(assginedCodeName.get(code)=="assassin") { // iteration through hashmap to see which role is associated with revealed code name 
@@ -180,8 +179,6 @@ public class assign {
 					}
 				}
 			}
-			
-			
 		}
 		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
 				turnCount++;
@@ -192,6 +189,27 @@ public class assign {
 			count2red = count1red;
 			count2blue = count1blue;
 		return 10;//means board not in game winning state
+	}
+	
+	/**
+	 * Returns the name of the team who won the game. Returns null if the game hasn't started or 
+	 * the game is not ended yet.
+	 * @return the name of the team won the game.
+	 */
+	public String teamWon() {
+		if(winningState()==0) {
+			if(turns==1) {
+				return "blue team";
+			}
+			if(turns==-1) {
+				return "red team";
+			}
+		}
+		return null;
+	}
+	
+	public void setTurns(int turn) {//makes it easier to test
+		turns=turn;
 	}
 	
 	}
