@@ -22,7 +22,7 @@ public class TeamWonTest {
 	if(a.winningState()==0) {
 	a.setTurns(1);
 	assertEquals("blue team", a.teamWon());
-	a.setTurns(-1);
+	a.setTurns(0);
 	assertEquals("red team", a.teamWon());
 	}}
 	@Test
@@ -34,7 +34,7 @@ public class TeamWonTest {
 	if(a.winningState()!=0) {
 	a.setTurns(1);
 	assertEquals(null, a.teamWon());
-	a.setTurns(-1);
+	a.setTurns(0);
 	assertEquals(null, a.teamWon());
 	}}
 }

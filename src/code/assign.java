@@ -12,7 +12,6 @@ public class assign {
 	private ArrayList<String>person=new ArrayList<String>();
 	private HashMap<String,String>assginedCodeName;
 	private HashMap<String,Boolean> Reveal;
-	private int turns=1;//1 is red team's turn, -1 is blue team's turn.
 	private int turnCount = 1;
 	private int count2red=0;
 	private int count2blue=0;
@@ -39,7 +38,7 @@ public class assign {
 	
 	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
 		
-		turns=1;//red team's turn
+		turnCount=1;//red team's turn
 		assginedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
@@ -60,15 +59,6 @@ public class assign {
 		}	
 	}
 	
-	public void selected(Location theLocationThatSelected) {
-		if(turns==1) {//make sure each time is turn for different turn.
-		turns=-1;
-		}
-		else if(turns==-1){
-		turns=1;
-		}
-		Reveal.put(theLocationThatSelected.getName(), true); //make the boolean to true which means that the codename is revealed.
-	}
 	public boolean updateLocation(Location theLocation) {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
 		if(turnCount%2!= 0) {//if it is reds turn
@@ -111,7 +101,7 @@ public class assign {
 	}
 	
 	public int turn() {//showing who's turn
-		int num=turns;
+		int num=turnCount%2;
 		return num;
 	}
 	
@@ -124,11 +114,11 @@ public class assign {
 					legal=true;
 				}
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
-					if(turns==1) {//if clue is illegal then the team's turn is forfeit
-						turns=-1;
+					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
+						turnCount=2;
 						}
-					else if(turns==-1){//should remember to call to update the frame and call observer()
-						turns=1;
+					else if(turnCount%2==0){//should remember to call to update the frame and call observer()
+						turnCount=1;
 						}
 					return false;
 				}
@@ -198,10 +188,10 @@ public class assign {
 	 */
 	public String teamWon() {
 		if(winningState()==0) {
-			if(turns==1) {
+			if(turnCount%2!=0) {
 				return "blue team";
 			}
-			if(turns==-1) {
+			if(turnCount%2==0) {
 				return "red team";
 			}
 		}
@@ -209,7 +199,7 @@ public class assign {
 	}
 	
 	public void setTurns(int turn) {//makes it easier to test
-		turns=turn;
+		turnCount=turn;
 	}
 	
 	}

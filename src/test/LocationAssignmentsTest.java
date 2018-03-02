@@ -82,6 +82,7 @@ public class LocationAssignmentsTest{
 	a.gameStarted(c, p);
 	String x=a.getcodename().get(1)+",5";
 	assertFalse(a.clue(x));
+	assertEquals(0,a.turn());//it becomes blue team's turn.
 	}
 	
 	@Test
@@ -92,9 +93,9 @@ public class LocationAssignmentsTest{
 	a.gameStarted(c, p);
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
-	a.selected(l[0][1]);
+	a.updateLocation(l[0][1]);
 	String x=a.getcodename().get(1)+",7";
 	assertTrue(a.clue(x));
-	}
-	
+	}	
 }
+
