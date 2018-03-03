@@ -25,7 +25,7 @@ public class assign {
 	/**
 	 * hashmap with codenames as keys which are paired to a person assignment
 	 */
-	private HashMap<String,String>assginedCodeName;
+	private HashMap<String,String>assignedCodeName;
 	/**
 	 * hashmap with codenames as keys paired to a boolean value to determine if revealed or not
 	 */
@@ -113,7 +113,7 @@ public class assign {
 	 */
 	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
 		turnCount=1;//red team's turn
-		assginedCodeName=new HashMap<String,String>();
+		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
 		setPerson(per.getList());
@@ -128,11 +128,11 @@ public class assign {
 	 * @param ArrayList<String agents - the person variable
 	 */
 	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>person){//map each codenames to the person.
-		HashMap<String, String> assgin=new HashMap<String,String>();
+		HashMap<String, String> assign=new HashMap<String,String>();
 		for(int i=0;i<codename.size();i++) {
-			assgin.put(codename.get(i),person.get(i));
+			assign.put(codename.get(i),person.get(i));
 		}
-		assginedCodeName=assgin;
+		assignedCodeName=assign;
 		
 		for(String y:codename) {
 			Reveal.put(y, false); //false means that the codenames is not reveal.
@@ -148,23 +148,23 @@ public class assign {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
 		if(count>-1) {
 		if(turnCount%2!= 0) {//if it is reds turn
-		if(assginedCodeName.get(theLocation.getName())=="red agent") {
+		if(assignedCodeName.get(theLocation.getName())=="red agent") {
 			count--;
 			redTotal--;//decrement total red agents
 			return true;
 		}
-		else if(assginedCodeName.get(theLocation.getName())=="blue agent") {
+		else if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 			blueTotal--;//decrement total blue agents
 			return false;
 		}
 		}
 		if(turnCount%2== 0) {
-			if(assginedCodeName.get(theLocation.getName())=="blue agent") {
+			if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 				count--;
 				blueTotal--;
 				return true;
 			}
-			else if(assginedCodeName.get(theLocation.getName())=="red agent") {
+			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
 				redTotal--;
 				return false;
 			}
@@ -262,7 +262,7 @@ public class assign {
 	 * @return The hashmap that mapping the codenames with person.
 	 */
 	public HashMap<String,String> getAssignedCodeNameandValues(){
-	return assginedCodeName;
+	return assignedCodeName;
 	}
 	/**
 	 * @return The hashmap that shows that whether a location is reveal or not.
@@ -292,16 +292,16 @@ public class assign {
 		int count1red = 0;
 		for(String code: Reveal.keySet()) {
 			if(Reveal.get(code)) {//iteration through hashmap to see which code names are associated with a true value
-				if(assginedCodeName.get(code)=="assassin") { // iteration through hashmap to see which role is associated with revealed code name 
+				if(assignedCodeName.get(code)=="assassin") { // iteration through hashmap to see which role is associated with revealed code name 
 					return 0; //return 0 means turn needs to be checked to find winner
 				}
-				if(assginedCodeName.get(code)=="blue agent") {
+				if(assignedCodeName.get(code)=="blue agent") {
 					count1blue++;
 					if(count1blue==8) {
 						return 1;//return 1 means game is in winning state and blue wins
 					}
 				}
-				if(assginedCodeName.get(code)=="red agent") {
+				if(assignedCodeName.get(code)=="red agent") {
 					count1red++;
 					if(count1red==9) {
 						return -1;// return -1 means game is in winning state and red wins
