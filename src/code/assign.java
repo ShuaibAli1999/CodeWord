@@ -7,7 +7,12 @@ import code.Location;
 import code.CodenamesList;
 import code.PersonAssignments;
 import code.InvalidCountException;
-
+/**
+ * 
+ * @author allllll of us
+ * encompasses all function of the code name game
+ *
+ */
 public class assign {
 	/**
 	 * the arraylist of codenames to be assigned to a location instance
@@ -278,7 +283,7 @@ public class assign {
 		return blueTotal;
 	}
 	/**
-	 * 
+	 * checkes to see if the board is in a winning state
 	 * @return an int that describes the type of winning state the board is in
 	 */
 	public int winningState() {
