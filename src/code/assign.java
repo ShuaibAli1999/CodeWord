@@ -266,6 +266,10 @@ public class assign {
 	public int getBlueTotal() {
 		return blueTotal;
 	}
+	/**
+	 * 
+	 * @return an int that describes the type of wining state the board is in
+	 */
 	public int winningState() {
 		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
 		int count1blue = 0;
