@@ -3,6 +3,9 @@ package code;
  * This class create location instance that store the string codenames.
  */
 public class Location {
+/**
+ * the code name
+ */
 private String name;
 /**
  * This is constructor assigning the instance variable name to the pass-in string.
