@@ -9,19 +9,26 @@ import code.PersonAssignments;
 import code.InvalidCountException;
 
 public class assign {
-	private ArrayList<String>codenames=new ArrayList<String>();
-	private ArrayList<String>person=new ArrayList<String>();
+	private ArrayList<String>codenames;
+	private ArrayList<String>person;
 	private HashMap<String,String>assginedCodeName;
 	private HashMap<String,Boolean> Reveal;
-	private int turnCount = 1;
-	private int count2red=0;
-	private int count2blue=0;
+	private int turnCount;
+	private int count2red;
+	private int count2blue;
 	private int redTotal;
 	private int blueTotal;
-	private Location[][] board=new Location[5][5];
+	private Location[][] board;
+	
 	public assign() {
 		redTotal = 9;
 		blueTotal = 8;
+		codenames =new ArrayList<String>();
+		person =  new ArrayList<String>();
+		turnCount =  1;
+		count2red = 0;
+		count2blue = 0;
+		board = new Location[5][5];
 	}
 	
 	private void setCodenames(ArrayList<String>codename){
