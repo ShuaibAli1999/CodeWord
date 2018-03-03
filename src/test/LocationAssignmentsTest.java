@@ -1,11 +1,11 @@
 package test;
+import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import code.assign;
 import code.Location;
@@ -84,6 +84,7 @@ public class LocationAssignmentsTest{
 	String x=a.getcodename().get(1)+",5";
 	assertFalse(a.clue(x));
 	assertEquals(0,a.turn());//it becomes blue team's turn.
+	assertTrue(a.getCount()==-1);
 	}
 	
 	@Test
