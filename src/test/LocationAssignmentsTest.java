@@ -97,10 +97,11 @@ public class LocationAssignmentsTest{
 	a.updateLocation(l[0][1]);
 	String x=a.getcodename().get(1)+",7";
 	assertTrue(a.clue(x));
+	assertTrue(a.getCount()==7);
 	}	
 	
 	@Test(expected = InvalidCountException.class)
-	public void clueTest4() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number equals to zero
+	public void clueTest5() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number equals to zero
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
@@ -113,7 +114,7 @@ public class LocationAssignmentsTest{
 	}	
 	
 	@Test(expected = InvalidCountException.class)
-	public void clueTest5() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number less than zero
+	public void clueTest6() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number less than zero
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();

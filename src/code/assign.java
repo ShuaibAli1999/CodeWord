@@ -19,6 +19,7 @@ public class assign {
 	private int redTotal;
 	private int blueTotal;
 	private Location[][] board;
+	private int count;
 	
 	public assign() {
 		redTotal = 9;
@@ -142,7 +143,7 @@ public class assign {
 	public boolean clue(String aClue) throws InvalidCountException {//passing in one word and one number for a clue, separate by comma.
 		String[] x= aClue.split(",");//try to separate the sentence into words.
 		boolean legal=true;
-		int count = Integer.parseInt(x[1]);
+		this.count = Integer.parseInt(x[1]);
 		if(count<0||count==0) {
 			throw new InvalidCountException();
 		}
@@ -167,7 +168,9 @@ public class assign {
 		}
 		return legal;
 	}
-	
+	public int getCount() {
+		return count;
+	}
 	public Location[][] getBoard(){
 		return board;
 	}
