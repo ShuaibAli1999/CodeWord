@@ -82,8 +82,10 @@ public class assign {
 	
 	public boolean updateLocation(Location theLocation) {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
+		if(count>-1) {
 		if(turnCount%2!= 0) {//if it is reds turn
 		if(assginedCodeName.get(theLocation.getName())=="red agent") {
+			count--;
 			redTotal--;//decrement total red agents
 			return true;
 		}
@@ -94,6 +96,7 @@ public class assign {
 		}
 		if(turnCount%2== 0) {
 			if(assginedCodeName.get(theLocation.getName())=="blue agent") {
+				count--;
 				blueTotal--;
 				return true;
 			}
@@ -101,6 +104,7 @@ public class assign {
 				redTotal--;
 				return false;
 			}
+		}
 		}
 		return false;
 		

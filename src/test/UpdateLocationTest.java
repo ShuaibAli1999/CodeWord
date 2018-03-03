@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import code.CodenamesList;
+import code.InvalidCountException;
 import code.Location;
 import code.PersonAssignments;
 import code.assign;
@@ -34,11 +35,19 @@ public class UpdateLocationTest {
 				break;
 			}
 		}
-		t3.updateLocation(te);
 		
+		try {
+			t3.clue("bannanaz,4");
+		} catch (InvalidCountException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		t3.updateLocation(te);
+		assertTrue(t3.getCount() == 3);
 		assertTrue(t3.getRedTotal()==8);
 		assertTrue(t3.updateLocation(te));
 		assertTrue(t3.getReveal().get(te.getName()));
 		
 	}
+
 }
