@@ -36,8 +36,16 @@ public class assign {
 		return person;
 	}
 	
+	/**
+	 * this method does the initialization that needed at the start of 
+	 * each new game:
+	 *  -setting red team to go first
+	 *  -create new instance of CodenameList and PersonAssignments
+	 *  -setting the ArrayList<String> instance variables codenames and person
+	 *  -mapping each codenames and person in Hashmap, and mapping each codenames to not revealed.
+	 *  -create a board with 25 Locaton instance variable and assign to different codenames.
+	 */
 	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
-		
 		turnCount=1;//red team's turn
 		assginedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
@@ -47,6 +55,10 @@ public class assign {
 		board=namesOnBoard(codenames);
 	}
 	
+	/**
+	 * Mapping each codenames to a person and save in a HashMap.
+	 * Mapping each codenames to the state of not revealed and save in a HashMap.
+	 */
 	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>agents){//map each codenames to the person.
 		HashMap<String, String> assgin=new HashMap<String,String>();
 		for(int i=0;i<codename.size();i++) {
@@ -85,6 +97,11 @@ public class assign {
 		
 	}
 	
+	/**
+	 * Take in a ArrayList of strings of random codenames and create a new Location array 
+	 * base on the arraylist.
+	 * @return Location array with codenames store.
+	 */
 	private Location[][] namesOnBoard(ArrayList<String>codename){
 		
 		Location[][] l=new Location[5][5];
@@ -105,6 +122,13 @@ public class assign {
 		return num;
 	}
 	
+	/**
+	 * Passing in a clue as string, which in clue one word and a number that separated by comma.
+	 * Split the string by comma. The clue will be legal if the clue does not include word same as 
+	 * one of the codenames that is not reveal. If the clue contain codename that is reveal, the clue 
+	 * is also legal. If clue contains word that same as codename that is not revealed, then the clue is illegal.
+	 * @return boolean value that indicate whether clue is legal or illegal.
+	 */
 	public boolean clue(String aClue) {//passing in one word and one number for a clue, separate by comma.
 		String[] x= aClue.split(",");//try to separate the sentence into words.
 		boolean legal=true;
