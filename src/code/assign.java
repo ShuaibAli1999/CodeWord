@@ -65,15 +65,32 @@ public class assign {
 		board = new Location[5][5];
 	}
 	
+	/**
+	 * sets the parameter to the instance variable
+	 * @param codename arraylist being passed in
+	 */
 	private void setCodenames(ArrayList<String>codename){
 		this.codenames=codename;
 	}
+	
+	/**
+	 * sets the parameter to the instance variable
+	 * @param person arraylist being passed in
+	 */
 	private void setPerson(ArrayList<String>person) {
 		this.person=person;
 	}
+	/**
+	 * makes it so one can access the private codenames variable
+	 * @return the codenames arraylist
+	 */
 	public ArrayList<String> getcodename(){
 		return codenames;
 	}
+	/**
+	 * makes it so one can access the private person variable
+	 * @return the person arraylist
+	 */
 	public ArrayList<String> getperson(){
 		return person;
 	}
@@ -86,6 +103,8 @@ public class assign {
 	 *  -setting the ArrayList<String> instance variables codenames and person
 	 *  -mapping each codenames and person in Hashmap, and mapping each codenames to not revealed.
 	 *  -create a board with 25 Locaton instance variable and assign to different codenames.
+	 *  @param CodenamesList cod - an instance of the CodenamesList class
+	 *  @param PersonAssignments per - an instance of the PersonAssignments class
 	 */
 	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
 		turnCount=1;//red team's turn
