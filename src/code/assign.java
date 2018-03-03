@@ -119,11 +119,13 @@ public class assign {
 	/**
 	 * Mapping each codenames to a person and save in a HashMap.
 	 * Mapping each codenames to the state of not revealed and save in a HashMap.
+	 * @param ArrayList<String> codename - the codename variable
+	 * @param ArrayList<String agents - the person variable
 	 */
-	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>agents){//map each codenames to the person.
+	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>person){//map each codenames to the person.
 		HashMap<String, String> assgin=new HashMap<String,String>();
 		for(int i=0;i<codename.size();i++) {
-			assgin.put(codename.get(i),agents.get(i));
+			assgin.put(codename.get(i),person.get(i));
 		}
 		assginedCodeName=assgin;
 		
@@ -132,6 +134,11 @@ public class assign {
 		}	
 	}
 	
+	/**
+	 * method that decrements the agent count and ends when a wrong agent, an innocent bystander, or an assasin is revealed
+	 * @param theLocation - an instance of the Location class
+	 * @return the boolean value true or false - false meaning the turn ends and the other team goes, true meaning the turn continues and the count is decremented
+	 */
 	public boolean updateLocation(Location theLocation) {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
 		if(count>-1) {
@@ -165,6 +172,7 @@ public class assign {
 	/**
 	 * Take in a ArrayList of strings of random codenames and create a new Location array 
 	 * base on the arraylist.
+	 * @param ArrayList<String> codename - an arraylist of codenames
 	 * @return Location array with codenames store.
 	 */
 	private Location[][] namesOnBoard(ArrayList<String>codename){
