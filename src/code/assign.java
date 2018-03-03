@@ -6,6 +6,7 @@ import java.util.HashMap;
 import code.Location;
 import code.CodenamesList;
 import code.PersonAssignments;
+import code.InvalidCountException;
 
 public class assign {
 	private ArrayList<String>codenames=new ArrayList<String>();
@@ -127,11 +128,17 @@ public class assign {
 	 * Split the string by comma. The clue will be legal if the clue does not include word same as 
 	 * one of the codenames that is not reveal. If the clue contain codename that is reveal, the clue 
 	 * is also legal. If clue contains word that same as codename that is not revealed, then the clue is illegal.
+	 * If the count number given by the clue is equal or less than zero, then throw the InvalidCountException.
 	 * @return boolean value that indicate whether clue is legal or illegal.
+	 * @throws InvalidCountException 
 	 */
-	public boolean clue(String aClue) {//passing in one word and one number for a clue, separate by comma.
+	public boolean clue(String aClue) throws InvalidCountException {//passing in one word and one number for a clue, separate by comma.
 		String[] x= aClue.split(",");//try to separate the sentence into words.
 		boolean legal=true;
+		int count = Integer.parseInt(x[1]);
+		if(count<0||count==0) {
+			throw new InvalidCountException();
+		}
 		for(String s:x) {
 			for(String c:Reveal.keySet()) {
 				if(s.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
