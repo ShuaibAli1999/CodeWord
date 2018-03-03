@@ -86,11 +86,11 @@ public class assign {
 		}
 		if(turnCount%2== 0) {
 			if(assginedCodeName.get(theLocation.getName())=="blue agent") {
-				redTotal--;
+				blueTotal--;
 				return true;
 			}
 			else if(assginedCodeName.get(theLocation.getName())=="red agent") {
-				blueTotal--;
+				redTotal--;
 				return false;
 			}
 		}
