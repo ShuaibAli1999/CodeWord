@@ -189,7 +189,10 @@ public class assign {
 		}
 		return l; //return the board with string on each index
 	}
-	
+	/**
+	 * if turn returns 1 it is red turn if turn return 0 it is blue turn
+	 * @return return an int of either 1 or 0
+	 */
 	public int turn() {//showing who's turn
 		int num=turnCount%2;
 		return num;
@@ -237,6 +240,10 @@ public class assign {
 		}
 		return legal;
 	}
+	/**
+	 * get's the value of count
+	 * @return the value of count
+	 */
 	public int getCount() {
 		return count;
 	}
@@ -272,7 +279,7 @@ public class assign {
 	}
 	/**
 	 * 
-	 * @return an int that describes the type of wining state the board is in
+	 * @return an int that describes the type of winning state the board is in
 	 */
 	public int winningState() {
 		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
@@ -324,7 +331,10 @@ public class assign {
 		}
 		return null;
 	}
-
+	/**
+	 * sets the turn for ease of testing
+	 * @param turn
+	 */
 	public void setTurns(int turn) {//makes it easier to test
 		turnCount=turn;
 	}
