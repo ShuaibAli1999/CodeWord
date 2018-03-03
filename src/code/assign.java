@@ -9,16 +9,49 @@ import code.PersonAssignments;
 import code.InvalidCountException;
 
 public class assign {
+	/**
+	 * the arraylist of codenames to be assigned to a location instance
+	 */
 	private ArrayList<String>codenames;
+	/**
+	 * the arraylist of people assignments to be assigned to a location instance
+	 */
 	private ArrayList<String>person;
+	/**
+	 * hashmap with codenames as keys which are paired to a person assignment
+	 */
 	private HashMap<String,String>assginedCodeName;
+	/**
+	 * hashmap with codenames as keys paired to a boolean value to determine if revealed or not
+	 */
 	private HashMap<String,Boolean> Reveal;
+	/**
+	 * int to keep track of which team's turn it is
+	 */
 	private int turnCount;
+	/**
+	 *  placeholder int used to check if there was a change in number of red agents revealed
+	 */
 	private int count2red;
+	/**
+	 *  placeholder int used to check if there was a change in number of blue agents revealed
+	 */
 	private int count2blue;
+	/**
+	 * total number of red agents left to be revealed
+	 */
 	private int redTotal;
+	/**
+	 * total number of blue agents left to be revealed
+	 */
 	private int blueTotal;
+	/**
+	 * creates a matrix for all the codenames
+	 */
 	private Location[][] board;
+	/**
+	 * keeps track of the number of guesses a team has after their spymaster has given a clue
+	 */
 	private int count;
 	
 	public assign() {
@@ -152,12 +185,8 @@ public class assign {
 				if(s.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
 					legal=true;
 					this.count = Integer.parseInt(x[1]);
-					if(count<0||count==0) {
-						throw new InvalidCountException();
-					}
 				}
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
-					this.count=-1;
 					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
 						turnCount=2;
 						}
@@ -169,11 +198,11 @@ public class assign {
 				if(s.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
 					this.count = Integer.parseInt(x[1]);
 					legal=true;
-					if(count<0||count==0) {
-						throw new InvalidCountException();
-					}
 				}
 			}
+		}
+		if(count<0||count==0) {
+			throw new InvalidCountException();
 		}
 		return legal;
 	}
