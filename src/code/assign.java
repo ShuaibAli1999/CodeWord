@@ -212,8 +212,12 @@ public class assign {
 				if(s.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
 					legal=true;
 					this.count = Integer.parseInt(x[1]);
+					if(count<0||count==0) {
+						throw new InvalidCountException();
+					}
 				}
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
+					this.count = -1;
 					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
 						turnCount=2;
 						}
@@ -224,12 +228,12 @@ public class assign {
 				}
 				if(s.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
 					this.count = Integer.parseInt(x[1]);
+					if(count<0||count==0) {
+						throw new InvalidCountException();
+					}
 					legal=true;
 				}
 			}
-		}
-		if(count<0||count==0) {
-			throw new InvalidCountException();
 		}
 		return legal;
 	}
