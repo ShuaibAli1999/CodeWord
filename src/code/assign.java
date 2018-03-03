@@ -143,14 +143,11 @@ public class assign {
 	public boolean clue(String aClue) throws InvalidCountException {//passing in one word and one number for a clue, separate by comma.
 		String[] x= aClue.split(",");//try to separate the sentence into words.
 		boolean legal=true;
-		this.count = Integer.parseInt(x[1]);
-		if(count<0||count==0) {
-			throw new InvalidCountException();
-		}
 		for(String s:x) {
 			for(String c:Reveal.keySet()) {
 				if(s.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
 					legal=true;
+					this.count = Integer.parseInt(x[1]);
 				}
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
 					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
@@ -162,29 +159,46 @@ public class assign {
 					return false;
 				}
 				if(s.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
+					this.count = Integer.parseInt(x[1]);
 					legal=true;
 				}
 			}
+		}
+		if(count<0||count==0) {
+			throw new InvalidCountException();
 		}
 		return legal;
 	}
 	public int getCount() {
 		return count;
 	}
+	/**
+	 * @return The board that has initialize 25 new Location instances variable.
+	 */
 	public Location[][] getBoard(){
 		return board;
 	}
-	
+	/**
+	 * @return The hashmap that mapping the codenames with person.
+	 */
 	public HashMap<String,String> getAssignedCodeNameandValues(){
 	return assginedCodeName;
 	}
-	
+	/**
+	 * @return The hashmap that shows that whether a location is reveal or not.
+	 */
 	public HashMap<String,Boolean> getReveal(){
 		return Reveal;
 	}
+	/**
+	 * @return The total number of red agents remain.
+	 */
 	public int getRedTotal() {
 		return redTotal;
 	}
+	/**
+	 * @return The total number of blue agents remain.
+	 */
 	public int getBlueTotal() {
 		return blueTotal;
 	}
@@ -238,7 +252,7 @@ public class assign {
 		}
 		return null;
 	}
-	
+
 	public void setTurns(int turn) {//makes it easier to test
 		turnCount=turn;
 	}
