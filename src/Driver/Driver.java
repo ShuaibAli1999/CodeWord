@@ -3,11 +3,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
+import code.Model;
 import GUI.GUI;
 
 public class Driver implements Runnable {
-	
+	private Model _model;
 	private JFrame _window;
 	private JPanel _mainPanel;
 	public Driver(Model m) {
@@ -15,7 +15,7 @@ public class Driver implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		Model m = new Model("dictionaries/large.txt", "dictionaries/HW2.config" );
+		Model m = new Model( );
 		SwingUtilities.invokeLater(new Driver(m));
 	}
 
@@ -25,7 +25,7 @@ public class Driver implements Runnable {
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 
-		new GUI(_model, _mainPanel, this);
+		new GUI();
 		
 		_window.setVisible(true);
 		_window.pack();
