@@ -21,11 +21,11 @@ public class Driver implements Runnable {
 
 	@Override
 	public void run() {
-		_window = new JFrame("TwistyWord");
+		_window = new JFrame("CodeNames");
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 
-		new GUI();
+		new GUI(_model, _mainPanel,this);
 		
 		_window.setVisible(true);
 		_window.pack();
