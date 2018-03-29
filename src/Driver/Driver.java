@@ -13,6 +13,9 @@ public class Driver implements Runnable {
 	public Driver(Model m) {
 		_model = m;
 	}
+	public JFrame getwindow() {
+		return _window;
+	}
 	
 	public static void main(String[] args) {
 		Model m = new Model( );

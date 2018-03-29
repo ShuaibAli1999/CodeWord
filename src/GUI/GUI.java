@@ -40,6 +40,7 @@ public class GUI implements Observer {
 		menu.add(menuItem);
 		menuItem = new JMenuItem("Exit");
 		menu.add(menuItem);
+		_windowHolder.getwindow().setJMenuBar(menuBar);
 }
 
 	@Override
