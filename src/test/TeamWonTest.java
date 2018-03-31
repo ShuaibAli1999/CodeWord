@@ -18,7 +18,7 @@ public class TeamWonTest {
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	if(a.winningState()==0) {
 	a.setTurns(1);
 	assertEquals("blue team", a.teamWon());
@@ -30,7 +30,7 @@ public class TeamWonTest {
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	if(a.winningState()!=0) {
 	a.setTurns(1);
 	assertEquals(null, a.teamWon());

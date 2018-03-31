@@ -19,7 +19,7 @@ public class GameWinningStateTest {
 		CodenamesList t2 = new CodenamesList();
 		assign t3 = new assign();
 		try {
-			t3.gameStarted(t2, t1);
+			t3.gameStarted();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class GameWinningStateTest {
 		CodenamesList t2 = new CodenamesList();
 		assign t3 = new assign();
 		try {
-			t3.gameStarted(t2, t1);
+			t3.gameStarted();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class GameWinningStateTest {
 		CodenamesList t2 = new CodenamesList();
 		assign t3 = new assign();
 		try {
-			t3.gameStarted(t2, t1);
+			t3.gameStarted();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class GameWinningStateTest {
 		CodenamesList t2 = new CodenamesList();
 		assign t3 = new assign();
 		try {
-			t3.gameStarted(t2, t1);
+			t3.gameStarted();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

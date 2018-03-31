@@ -19,7 +19,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	HashMap<String, String> map=a.getAssignedCodeNameandValues();
@@ -33,7 +33,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	HashMap<String, String> map=a.getAssignedCodeNameandValues();
@@ -47,7 +47,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	HashMap<String, String> map=a.getAssignedCodeNameandValues();
@@ -61,7 +61,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	assertEquals("red team should go first",1,a.turn());
 	}
 	
@@ -70,7 +70,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	String x="location,3";
 	assertTrue(a.clue(x));
 	}
@@ -80,7 +80,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	String x=a.getcodename().get(1)+",5";
 	assertFalse(a.clue(x));
 	assertEquals(0,a.turn());//it becomes blue team's turn.
@@ -92,7 +92,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	a.updateLocation(l[0][1]);
@@ -106,7 +106,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	a.updateLocation(l[0][1]);
@@ -119,7 +119,7 @@ public class LocationAssignmentsTest{
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
-	a.gameStarted(c, p);
+	a.gameStarted();
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	a.updateLocation(l[0][1]);
