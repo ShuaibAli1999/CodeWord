@@ -114,7 +114,9 @@ public class assign {
 	 *  @param CodenamesList cod - an instance of the CodenamesList class
 	 *  @param PersonAssignments per - an instance of the PersonAssignments class
 	 */
-	public void gameStarted(CodenamesList cod,PersonAssignments per) throws FileNotFoundException, IOException{//set up for the game.
+	public void gameStarted() throws FileNotFoundException, IOException{//set up for the game.
+		CodenamesList cod = new CodenamesList();
+		PersonAssignments per=new PersonAssignments();
 		turnCount=1;//red team's turn
 		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
@@ -130,7 +132,7 @@ public class assign {
 	 * @param ArrayList<String> codename - the codename variable
 	 * @param ArrayList<String agents - the person variable
 	 */
-	private void  assignCodeName(ArrayList<String>codename,ArrayList<String>person){//map each codenames to the person.
+	private void  assignCodeName(ArrayList<String> codename,ArrayList<String>person){//map each codenames to the person
 		HashMap<String, String> assign=new HashMap<String,String>();
 		for(int i=0;i<codename.size();i++) {
 			assign.put(codename.get(i),person.get(i));
