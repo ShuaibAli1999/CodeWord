@@ -14,7 +14,13 @@ import code.InvalidCountException;
  *
  */
 public class assign {
+	/** 
+	 * the arraylist of observers
+	 */
 	private ArrayList<Observer> _observers;
+	/**
+	 * the font of the words in GUI
+	 */
 	public int font =33;
 	/**
 	 * the arraylist of codenames to be assigned to a location instance
@@ -348,11 +354,18 @@ public class assign {
 	public void setTurns(int turn) {//makes it easier to test
 		turnCount=turn;
 	}
+	
+	/**
+	 * adds GUI as an observer
+	 */
 	public void addObserver(Observer obs) {
 		_observers.add(obs);
 		notifyObservers();
 	}
 
+	/**
+	 * updates the GUI
+	 */
 	public void notifyObservers() {
 		for (Observer obs : _observers) {
 			obs.update();
