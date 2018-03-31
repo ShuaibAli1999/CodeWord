@@ -2,6 +2,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -25,33 +27,45 @@ public class GUI implements Observer {
 	
 	private assign _model;
 	private Driver _windowHolder;
+	private JPanel assignPanel;
 	
-	public GUI(assign m, JPanel mp, Driver driver) {
+	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
 		JPanel _mainPanel = mp;
+		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
+		GridLayout experimentLayout = new GridLayout(5,5);
+		assignPanel=new JPanel();
+		assignPanel.setLayout(experimentLayout);
+		_mainPanel.add(assignPanel);
 		JMenuBar menuBar;
 		JMenu menu;
 		JMenuItem menuItem;
 		menuBar = new JMenuBar();
 		mp.add(menuBar);
 		menu = new JMenu("File");
-		setMenuProperties(menu);
 		menuBar.add(menu);
 		menuItem = new JMenuItem("New Game");
 		menu.add(menuItem);
-		setMenuItemProperties(menuItem);
 		menuItem = new JMenuItem("Exit");
-		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
 		_windowHolder.getwindow().setJMenuBar(menuBar);
+		_model.gameStarted();
+		_model.addObserver(this);
 }
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		assignPanel.removeAll();
+		ArrayList<String> codenames = _model.getcodename();
+		for (int i=0; i<codenames.size(); i=i+1) {
+			JButton b = new JButton(""+codenames.get(i));
+			assignPanel.add(b);
+			b.addActionListener(new codenameButtonHandler());
+		}
 		
 	}
+
 	public void setMenuProperties(JMenu menu) {
 		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
 		menu.setBackground(Color.WHITE);

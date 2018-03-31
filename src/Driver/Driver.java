@@ -1,4 +1,7 @@
 package Driver;
+import java.awt.HeadlessException;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -24,17 +27,23 @@ public class Driver implements Runnable {
 	}
 
 	@Override
-	public void run() {
-		_window = new JFrame("CodeNames");
-		_mainPanel = new JPanel();
-		_window.getContentPane().add(_mainPanel);
+	public void run(){
+			_window = new JFrame("CodeNames");
+			_mainPanel = new JPanel();
+			_window.getContentPane().add(_mainPanel);
 
-		new GUI(_model, _mainPanel,this);
-		
-		_window.setVisible(true);
-		_window.pack();
-		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-	}
+			try {
+				new GUI(_model, _mainPanel,this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			_window.setVisible(true);
+			_window.pack();
+			_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		}
+	
 	public void updateJFrame() {
 		_window.pack();
 		_window.repaint();
