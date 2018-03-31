@@ -36,10 +36,13 @@ public class GUI implements Observer {
 		menuBar = new JMenuBar();
 		mp.add(menuBar);
 		menu = new JMenu("File");
+		setMenuProperties(menu);
 		menuBar.add(menu);
 		menuItem = new JMenuItem("New Game");
 		menu.add(menuItem);
+		setMenuItemProperties(menuItem);
 		menuItem = new JMenuItem("Exit");
+		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
 		_windowHolder.getwindow().setJMenuBar(menuBar);
 }
@@ -48,5 +51,35 @@ public class GUI implements Observer {
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+	public void setMenuProperties(JMenu menu) {
+		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
+		menu.setBackground(Color.WHITE);
+		menu.setForeground(Color.BLACK);
+		menu.setOpaque(true);
+		menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
+	}
+	public void setMenuItemProperties(JMenuItem item) {
+		item.setFont(new Font("Courier", Font.BOLD, _model.font));
+		item.setBackground(Color.WHITE);
+		item.setForeground(Color.BLACK);
+		item.setOpaque(true);
+		item.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
+	}
+	
+	public void setButtonProperties(JButton button) {
+		button.setFont(new Font("Courier", Font.BOLD, _model.font));
+		button.setBackground(Color.WHITE);
+		button.setForeground(Color.BLACK);
+		button.setOpaque(true);
+		button.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
+	}
+
+	public void setLabelProperties(JLabel label) {
+		label.setFont(new Font("Courier", Font.BOLD, _model.font));
+		label.setBackground(Color.WHITE);
+		label.setForeground(Color.BLACK);
+		label.setOpaque(true);
+		label.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
 }

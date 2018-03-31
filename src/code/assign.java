@@ -14,6 +14,8 @@ import code.InvalidCountException;
  *
  */
 public class assign {
+	private ArrayList<Observer> _observers;
+	public int font =33;
 	/**
 	 * the arraylist of codenames to be assigned to a location instance
 	 */
@@ -68,6 +70,7 @@ public class assign {
 		count2red = 0;
 		count2blue = 0;
 		board = new Location[5][5];
+		_observers=new ArrayList<>();
 	}
 	
 	/**
@@ -342,6 +345,16 @@ public class assign {
 	 */
 	public void setTurns(int turn) {//makes it easier to test
 		turnCount=turn;
+	}
+	public void addObserver(Observer obs) {
+		_observers.add(obs);
+		notifyObservers();
+	}
+
+	public void notifyObservers() {
+		for (Observer obs : _observers) {
+			obs.update();
+		}
 	}
 	
 	}
