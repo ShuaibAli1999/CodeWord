@@ -18,14 +18,15 @@ import javax.swing.Timer;
 
 import code.Model;
 import code.Observer;
+import code.assign;
 import Driver.Driver;
 
 public class GUI implements Observer {
 	
-	private Model _model;
+	private assign _model;
 	private Driver _windowHolder;
 	
-	public GUI(Model m, JPanel mp, Driver driver) {
+	public GUI(assign m, JPanel mp, Driver driver) {
 		_windowHolder = driver;
 		_model = m;
 		JPanel _mainPanel = mp;

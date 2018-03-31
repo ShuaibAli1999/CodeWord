@@ -4,13 +4,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import code.Model;
+import code.assign;
 import GUI.GUI;
 
 public class Driver implements Runnable {
-	private Model _model;
+	private assign _model;
 	private JFrame _window;
 	private JPanel _mainPanel;
-	public Driver(Model m) {
+	public Driver(assign m) {
 		_model = m;
 	}
 	public JFrame getwindow() {
@@ -18,7 +19,7 @@ public class Driver implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		Model m = new Model( );
+		assign m = new assign( );
 		SwingUtilities.invokeLater(new Driver(m));
 	}
 
