@@ -44,10 +44,13 @@ public class GUI implements Observer {
 		menuBar = new JMenuBar();
 		mp.add(menuBar);
 		menu = new JMenu("File");
+		setMenuProperties(menu);
 		menuBar.add(menu);
 		menuItem = new JMenuItem("New Game");
+		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
 		menuItem = new JMenuItem("Exit");
+		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
 		_windowHolder.getwindow().setJMenuBar(menuBar);
 		_model.gameStarted();
@@ -60,6 +63,7 @@ public class GUI implements Observer {
 		ArrayList<String> codenames = _model.getcodename();
 		for (int i=0; i<codenames.size(); i=i+1) {
 			JButton b = new JButton(""+codenames.get(i));
+			setButtonProperties(b);
 			assignPanel.add(b);
 			b.addActionListener(new codenameButtonHandler());
 		}
