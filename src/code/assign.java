@@ -124,6 +124,8 @@ public class assign {
 		CodenamesList cod = new CodenamesList();
 		PersonAssignments per=new PersonAssignments();
 		turnCount=1;//red team's turn
+		redTotal = 9;
+		blueTotal = 8;
 		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
@@ -238,10 +240,10 @@ public class assign {
 				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
 					this.count = -1;
 					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
-						turnCount=2;
+						turnCount++;
 						}
 					else if(turnCount%2==0){//should remember to call to update the frame and call observer()
-						turnCount=1;
+						turnCount++;
 						}
 					return false;
 				}
