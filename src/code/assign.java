@@ -13,6 +13,7 @@ import code.InvalidCountException;
  * encompasses all function of the code name game
  *
  */
+//Have to add notifyObserver to all methods that need to run update on GUI
 public class assign {
 	/** 
 	 * the arraylist of observers
@@ -168,6 +169,7 @@ public class assign {
 		}
 		else if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 			blueTotal--;//decrement total blue agents
+			//turn count should be changed here probably 
 			return false;
 		}
 		}
@@ -179,6 +181,7 @@ public class assign {
 			}
 			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
 				redTotal--;
+				//turn count should be changed here probably 
 				return false;
 			}
 		}
