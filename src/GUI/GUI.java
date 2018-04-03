@@ -53,6 +53,7 @@ public class GUI implements Observer {
 		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
 		menuItem1 = new JMenuItem("Exit");
+		menuItem1.addActionListener(new newCloseProgramHandler());
 		setMenuItemProperties(menuItem1);
 		menu.add(menuItem1);
 		_windowHolder.getwindow().setJMenuBar(menuBar);		
