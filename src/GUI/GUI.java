@@ -28,6 +28,7 @@ public class GUI implements Observer {
 	private assign _model;
 	private Driver _windowHolder;
 	private JPanel assignPanel;
+	public boolean st = false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -41,24 +42,27 @@ public class GUI implements Observer {
 		JMenuBar menuBar;
 		JMenu menu;
 		JMenuItem menuItem;
+		JMenuItem menuItem1;
 		menuBar = new JMenuBar();
 		mp.add(menuBar);
 		menu = new JMenu("File");
 		setMenuProperties(menu);
 		menuBar.add(menu);
 		menuItem = new JMenuItem("New Game");
+		menuItem.addActionListener(new newGameHandler(this));
 		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
-		menuItem = new JMenuItem("Exit");
-		setMenuItemProperties(menuItem);
-		menu.add(menuItem);
-		_windowHolder.getwindow().setJMenuBar(menuBar);
+		menuItem1 = new JMenuItem("Exit");
+		setMenuItemProperties(menuItem1);
+		menu.add(menuItem1);
+		_windowHolder.getwindow().setJMenuBar(menuBar);		
 		_model.gameStarted();
 		_model.addObserver(this);
 }
 
 	@Override
 	public void update() {
+		
 		assignPanel.removeAll();
 		ArrayList<String> codenames = _model.getcodename();
 		for (int i=0; i<codenames.size(); i=i+1) {
@@ -66,6 +70,29 @@ public class GUI implements Observer {
 			setButtonProperties(b);
 			assignPanel.add(b);
 			b.addActionListener(new codenameButtonHandler());
+		}
+		if(st==true) {
+			try {
+				_model.gameStarted();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			assignPanel.removeAll();
+			
+			ArrayList<String> c = _model.getcodename();
+			for (int i=0; i<c.size(); i=i+1) {
+				JButton b = new JButton(""+c.get(i));
+				setButtonProperties(b);
+				assignPanel.add(b);
+				b.addActionListener(new codenameButtonHandler());
+			}
+			assignPanel.revalidate();
+			assignPanel.repaint();
+			st=false;
 		}
 		
 	}
