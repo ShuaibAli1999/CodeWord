@@ -22,6 +22,9 @@ public class codenameButtonHandler implements ActionListener{
 		for(int i = 0; i<_m.getBoard().length;i++ ) {
 			for(int j = 0; j<_m.getBoard()[i].length;j++) {
 				if(codeName.equals(_m.getBoard()[i][j].getName())) {
+					if(_m.getAssignedCodeNameandValues().get(codeName).equals("assassin")) {
+						gui.assas=true;
+					}
 					_m.updateLocation(_m.getBoard()[i][j]);
 					gui.update();
 					break;

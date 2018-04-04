@@ -32,6 +32,7 @@ public class GUI implements Observer {
 	private JLabel whosTurn; 
 	private JPanel top;
 	public boolean st = false;
+	public boolean assas = false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -127,9 +128,28 @@ public class GUI implements Observer {
 			top.revalidate();
 			top.repaint();
 		}
-	
-		}
-		
+//		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
+//			assas=false;
+//		if(_model.winningState()==-1) {
+//			assignPanel.removeAll();
+//			assignPanel.add(new JLabel("RED TEAM WINS"));
+//			assignPanel.revalidate();
+//			assignPanel.repaint();
+//			}
+//		if(_model.winningState()==1) {
+//		assignPanel.removeAll();
+//		assignPanel.add(new JLabel("BLUE TEAM WINS"));
+//		assignPanel.revalidate();
+//		assignPanel.repaint();
+//		}
+//		if(_model.winningState()==0) {
+//			assignPanel.removeAll();
+//			assignPanel.add(new JLabel(_model.teamWon()+""+ " "+ "won"));
+//			assignPanel.revalidate();
+//			assignPanel.repaint();
+//		}
+//		}
+	}
 
 	public void setMenuProperties(JMenu menu) {
 		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
