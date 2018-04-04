@@ -66,7 +66,7 @@ public class assign {
 	/**
 	 * keeps track of the number of guesses a team has after their spymaster has given a clue
 	 */
-	private int count;
+	private int count =5;
 	
 	public assign() {
 		redTotal = 9;
@@ -217,6 +217,9 @@ public class assign {
 	public int turn() {//showing who's turn
 		int num=turnCount%2;
 		return num;
+	}
+	public void changeTurn() {
+		turnCount++;
 	}
 	
 	/**

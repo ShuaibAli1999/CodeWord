@@ -28,14 +28,21 @@ public class GUI implements Observer {
 	private assign _model;
 	private Driver _windowHolder;
 	private JPanel assignPanel;
+	private JPanel buttom;
 	public boolean st = false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
 		JPanel _mainPanel = mp;
+		
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
 		GridLayout experimentLayout = new GridLayout(5,5);
+		buttom = new JPanel();
+		JButton pass = new JButton("Pass");
+		pass.addActionListener(new passHandler(_model));
+		setButtonProperties(pass);
+		buttom.add(pass);
 		assignPanel=new JPanel();
 		assignPanel.setLayout(experimentLayout);
 		_mainPanel.add(assignPanel);
@@ -56,6 +63,7 @@ public class GUI implements Observer {
 		menuItem1.addActionListener(new newCloseProgramHandler());
 		setMenuItemProperties(menuItem1);
 		menu.add(menuItem1);
+		_mainPanel.add(buttom);
 		_windowHolder.getwindow().setJMenuBar(menuBar);		
 		_model.gameStarted();
 		_model.addObserver(this);
