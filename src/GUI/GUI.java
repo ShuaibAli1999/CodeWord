@@ -69,8 +69,17 @@ public class GUI implements Observer {
 		for (int i=0; i<codenames.size(); i=i+1) {
 			JButton b = new JButton(""+codenames.get(i));
 			setButtonProperties(b);
+			if(_model.getReveal().get(codenames.get(i))==true) {
+				JLabel label = new JLabel(""+_model.getAssignedCodeNameandValues().get(codenames.get(i)));
+				setLabelProperties(label);
+				assignPanel.add(label);
+			}
+			else {
 			assignPanel.add(b);
-			b.addActionListener(new codenameButtonHandler());
+			b.addActionListener(new codenameButtonHandler(_model,this,codenames.get(i)));
+			}
+			assignPanel.revalidate();
+			assignPanel.repaint();
 		}
 		if(st==true) {
 			try {
@@ -89,14 +98,15 @@ public class GUI implements Observer {
 				JButton b = new JButton(""+c.get(i));
 				setButtonProperties(b);
 				assignPanel.add(b);
-				b.addActionListener(new codenameButtonHandler());
+				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
 			}
 			assignPanel.revalidate();
 			assignPanel.repaint();
 			st=false;
 		}
+	
+		}
 		
-	}
 
 	public void setMenuProperties(JMenu menu) {
 		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
