@@ -191,6 +191,7 @@ public class assign {
 			turnCount++;
 		}
 		}
+		turnCount++;
 		return false;
 		
 	}
