@@ -66,7 +66,7 @@ public class assign {
 	/**
 	 * keeps track of the number of guesses a team has after their spymaster has given a clue
 	 */
-	private int count =5;
+	private int count;
 	
 	public assign() {
 		redTotal = 9;
@@ -170,6 +170,7 @@ public class assign {
 		else if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 			blueTotal--;//decrement total blue agents
 			//turn count should be changed here probably 
+			turnCount++;
 			return false;
 		}
 		}
@@ -182,8 +183,15 @@ public class assign {
 			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
 				redTotal--;
 				//turn count should be changed here probably 
+				turnCount++;
 				return false;
 			}
+		}
+		if(assignedCodeName.get(theLocation.getName())=="innocent bystander") {
+			turnCount++;
+		}
+		if(assignedCodeName.get(theLocation.getName())=="assassin") {
+			turnCount++;
 		}
 		}
 		return false;

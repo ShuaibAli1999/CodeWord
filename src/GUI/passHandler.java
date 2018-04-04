@@ -7,14 +7,16 @@ import code.assign;
 
 public class passHandler implements ActionListener {
 	private assign _m;
-
-	public passHandler(assign m) {
+	private GUI gui;
+	public passHandler(assign m, GUI g) {
 		_m=m;
+		gui=g;
 	}	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		_m.changeTurn();
+		gui.update();
 	}
 
 }

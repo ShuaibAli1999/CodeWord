@@ -29,18 +29,21 @@ public class GUI implements Observer {
 	private Driver _windowHolder;
 	private JPanel assignPanel;
 	private JPanel buttom;
+	private JLabel whosTurn; 
+	private JPanel top;
 	public boolean st = false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
 		JPanel _mainPanel = mp;
-		
+		top = new JPanel();
+		_mainPanel.add(top);
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
 		GridLayout experimentLayout = new GridLayout(5,5);
 		buttom = new JPanel();
 		JButton pass = new JButton("Pass");
-		pass.addActionListener(new passHandler(_model));
+		pass.addActionListener(new passHandler(_model,this));
 		setButtonProperties(pass);
 		buttom.add(pass);
 		assignPanel=new JPanel();
@@ -111,6 +114,18 @@ public class GUI implements Observer {
 			assignPanel.revalidate();
 			assignPanel.repaint();
 			st=false;
+		}
+		if(_model.turn()==1) {
+			top.removeAll();
+			top.add(new JLabel("Red Turn"));
+			top.revalidate();
+			top.repaint();
+		}
+		else {
+			top.removeAll();
+			top.add(new JLabel("Blue Turn"));
+			top.revalidate();
+			top.repaint();
 		}
 	
 		}
