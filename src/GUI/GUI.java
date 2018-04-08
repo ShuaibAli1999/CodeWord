@@ -52,6 +52,7 @@ public class GUI implements Observer {
 	private JButton b;
 	private JButton b1;
 	private int turn;
+	private int num=0;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -119,11 +120,12 @@ public class GUI implements Observer {
 
 	@Override
 	public void update() {
+		if(num>0) {
 		if(turn!=_model.turn()){
 			if(_model.turn()==1) {
-				JOptionPane.showMessageDialog(null, "Red team spymaster please enter a clue and a count number.");
+				JOptionPane.showMessageDialog(null, "BLUE TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
 			}else if(_model.turn()==0) {
-				JOptionPane.showMessageDialog(null, "Blue team spymaster please enter a clue and a count number.");
+				JOptionPane.showMessageDialog(null, "RED TEAM'S TURN ENDS. Blue team spymaster please enter a clue and a count number.");
 			}
 			countP.removeAll();
 			clueP.removeAll();
@@ -131,7 +133,11 @@ public class GUI implements Observer {
 			countTF.setEditable(true);
 			b.setEnabled(true);
 			b1.setEnabled(true);
+		}}
+		else {
+			JOptionPane.showMessageDialog(null, "Game Started! Red team spymaster please enter a clue and a count number.");
 		}
+		num=num+1;
 		assignPanel.removeAll();
 		ArrayList<String> codenames = _model.getcodename();
 		for (int i=0; i<codenames.size(); i=i+1) {
@@ -201,7 +207,7 @@ public class GUI implements Observer {
 			ClueEntered=false;
 		}
 		else if(validClue!=true&&ClueEntered){
-			JOptionPane.showMessageDialog(null, "Invalid clue! Please enter again.");
+			JOptionPane.showMessageDialog(null, "Clue cannot be a number, more than one words, or codenames that is not revealed. Please enter again.");
 			ClueEntered=false;
 		}
 		if(validCount&&CountEntered) {
@@ -218,7 +224,7 @@ public class GUI implements Observer {
 			CountEntered=false;
 		}
 		else if(validCount!=true&&CountEntered){
-			JOptionPane.showMessageDialog(null, "Invalid count number! Please enter again.");
+			JOptionPane.showMessageDialog(null, "Count number cannot be a string, or less than or equals to zero. Please enter again.");
 			CountEntered=false;
 		}
 		if(updateCount) {
