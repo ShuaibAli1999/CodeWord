@@ -83,7 +83,6 @@ public class LocationAssignmentsTest{
 	a.gameStarted();
 	String x=a.getcodename().get(1);
 	assertFalse(a.clue(x));
-	assertEquals(0,a.turn());//it becomes blue team's turn.
 	assertTrue(a.getCount()==-1);
 	}
 	

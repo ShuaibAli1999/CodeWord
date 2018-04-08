@@ -13,11 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.Timer;
-
+import GUI.clueButtonHandler;
+import code.InvalidCountException;
 import code.Model;
 import code.Observer;
 import code.assign;
@@ -31,8 +33,18 @@ public class GUI implements Observer {
 	private JPanel buttom;
 	private JLabel whosTurn; 
 	private JPanel top;
+	private JPanel Clue;
+	protected String clue;
+	private JPanel clueP;
+	private JPanel countP;
+	private JPanel enterP;
+	protected JTextField clueTF;
+	protected JTextField countTF;
+	protected int count;
+	protected boolean valid=false;
 	public boolean st = false;
 	public boolean assas = false;
+	protected boolean Entered=false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -40,6 +52,31 @@ public class GUI implements Observer {
 		JPanel _mainPanel = mp;
 		top = new JPanel();
 		_mainPanel.add(top);
+		enterP=new JPanel();
+		clueTF= new JTextField("Enter one word for clue",20);
+		JButton b=new JButton("Ok");
+		b.addActionListener(new clueButtonHandler(this,_model));
+		countTF= new JTextField("Enter one number for count",20);
+		JButton b1=new JButton("Ok");
+		b1.addActionListener(new countButtonHandler(this,_model));
+		enterP.add(clueTF);
+		enterP.add(b);
+		enterP.add(countTF);
+		enterP.add(b1);
+		_mainPanel.add(enterP);
+		Clue=new JPanel();
+		clueP=new JPanel();
+		countP=new JPanel();
+		Clue.setLayout(new BoxLayout(Clue, BoxLayout.X_AXIS));
+		JLabel cl=new JLabel("Clue: ");
+		setLabelProperties(cl);
+		Clue.add(cl);
+		Clue.add(clueP);
+		JLabel co=new JLabel("Count: ");
+		setLabelProperties(co);
+		Clue.add(co);
+		Clue.add(countP);
+		_mainPanel.add(Clue);
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
 		GridLayout experimentLayout = new GridLayout(5,5);
 		buttom = new JPanel();
@@ -127,6 +164,35 @@ public class GUI implements Observer {
 			top.add(new JLabel("Blue Turn"));
 			top.revalidate();
 			top.repaint();
+		}
+		
+		if(_model.turn()==1) {
+			top.removeAll();
+			top.add(new JLabel("Red Turn"));
+			top.revalidate();
+			top.repaint();
+		}
+		else {
+			top.removeAll();
+			top.add(new JLabel("Blue Turn"));
+			top.revalidate();
+			top.repaint();
+		}
+		if(valid&&Entered) {
+			clueP.removeAll();
+			countP.removeAll();
+			JLabel clue=new JLabel(clueTF.getText());
+			setLabelProperties(clue);
+			clueP.add(clue);
+			clueP.revalidate();
+			clueP.repaint();
+			countP.revalidate();
+			countP.repaint();
+			Entered=false;
+		}
+		else if(valid!=true&&Entered){
+			JOptionPane.showMessageDialog(null, "Invalid clue! Please enter again.");
+			Entered=false;
 		}
 //		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
 //			assas=false;
