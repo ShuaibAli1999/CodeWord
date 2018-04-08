@@ -47,6 +47,11 @@ public class GUI implements Observer {
 	public boolean assas = false;
 	protected boolean ClueEntered=false;
 	protected boolean CountEntered=false;
+	protected boolean switchTurn=false;
+	protected boolean updateCount=false;
+	private JButton b;
+	private JButton b1;
+	private int turn;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -56,10 +61,10 @@ public class GUI implements Observer {
 		_mainPanel.add(top);
 		enterP=new JPanel();
 		clueTF= new JTextField("Enter one word for clue",20);
-		JButton b=new JButton("Ok");
+		b=new JButton("Ok");
 		b.addActionListener(new clueButtonHandler(this,_model));
 		countTF= new JTextField("Enter one number for count",20);
-		JButton b1=new JButton("Ok");
+		b1=new JButton("Ok");
 		b1.addActionListener(new countButtonHandler(this,_model));
 		enterP.add(clueTF);
 		enterP.add(b);
@@ -114,7 +119,19 @@ public class GUI implements Observer {
 
 	@Override
 	public void update() {
-		
+		if(turn!=_model.turn()){
+			if(_model.turn()==1) {
+				JOptionPane.showMessageDialog(null, "Red team spymaster please enter a clue and a count number.");
+			}else if(_model.turn()==0) {
+				JOptionPane.showMessageDialog(null, "Blue team spymaster please enter a clue and a count number.");
+			}
+			countP.removeAll();
+			clueP.removeAll();
+			clueTF.setEditable(true);
+			countTF.setEditable(true);
+			b.setEnabled(true);
+			b1.setEnabled(true);
+		}
 		assignPanel.removeAll();
 		ArrayList<String> codenames = _model.getcodename();
 		for (int i=0; i<codenames.size(); i=i+1) {
@@ -135,6 +152,8 @@ public class GUI implements Observer {
 		if(st==true) {
 			try {
 				_model.gameStarted();
+				clueP.removeAll();
+				countP.removeAll();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -158,25 +177,14 @@ public class GUI implements Observer {
 		if(_model.turn()==1) {
 			top.removeAll();
 			top.add(new JLabel("Red Turn"));
+			turn=_model.turn();
 			top.revalidate();
 			top.repaint();
 		}
 		else {
 			top.removeAll();
 			top.add(new JLabel("Blue Turn"));
-			top.revalidate();
-			top.repaint();
-		}
-		
-		if(_model.turn()==1) {
-			top.removeAll();
-			top.add(new JLabel("Red Turn"));
-			top.revalidate();
-			top.repaint();
-		}
-		else {
-			top.removeAll();
-			top.add(new JLabel("Blue Turn"));
+			turn=_model.turn();
 			top.revalidate();
 			top.repaint();
 		}
@@ -187,6 +195,9 @@ public class GUI implements Observer {
 			clueP.add(clue);
 			clueP.revalidate();
 			clueP.repaint();
+			clueTF.setText("");
+			clueTF.setEditable(false);
+			b.setEnabled(false);
 			ClueEntered=false;
 		}
 		else if(validClue!=true&&ClueEntered){
@@ -196,15 +207,28 @@ public class GUI implements Observer {
 		if(validCount&&CountEntered) {
 			countP.removeAll();
 			JLabel count=new JLabel(countTF.getText());
+			this.count=Integer.parseInt(countTF.getText());
 			setLabelProperties(count);
 			countP.add(count);
 			countP.revalidate();
 			countP.repaint();
+			countTF.setText("");
+			countTF.setEditable(false);
+			b1.setEnabled(false);
 			CountEntered=false;
 		}
 		else if(validCount!=true&&CountEntered){
 			JOptionPane.showMessageDialog(null, "Invalid count number! Please enter again.");
 			CountEntered=false;
+		}
+		if(updateCount) {
+			countP.removeAll();
+			JLabel count=new JLabel(""+this.count);
+			setLabelProperties(count);
+			countP.add(count);
+			countP.revalidate();
+			countP.repaint();
+			updateCount=false;
 		}
 //		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
 //			assas=false;

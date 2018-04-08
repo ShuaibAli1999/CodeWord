@@ -26,6 +26,12 @@ public class codenameButtonHandler implements ActionListener{
 						gui.assas=true;
 					}
 					_m.updateLocation(_m.getBoard()[i][j]);
+					if(_m.updateLocation(_m.getBoard()[i][j])==false) {
+						_m.changeTurn();	
+					}else {
+						gui.updateCount=true;
+						gui.count=gui.count-1;
+					}
 					gui.update();
 					break;
 				}
