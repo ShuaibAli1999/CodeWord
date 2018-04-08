@@ -66,12 +66,12 @@ public class LocationAssignmentsTest{
 	}
 	
 	@Test
-	public void clueTest1() throws FileNotFoundException, IOException, InvalidCountException{//test when the clue doesn't contain any codenames that is not revealed.
+	public void clueTest1() throws FileNotFoundException, IOException{//test when the clue doesn't contain any codenames that is not revealed.
 	assign a=new assign();
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
 	a.gameStarted();
-	String x="location,3";
+	String x="location";
 	assertTrue(a.clue(x));
 	}
 	
@@ -81,7 +81,7 @@ public class LocationAssignmentsTest{
 	CodenamesList c=new CodenamesList();
 	PersonAssignments p=new PersonAssignments();
 	a.gameStarted();
-	String x=a.getcodename().get(1)+",5";
+	String x=a.getcodename().get(1);
 	assertFalse(a.clue(x));
 	assertEquals(0,a.turn());//it becomes blue team's turn.
 	assertTrue(a.getCount()==-1);
@@ -96,35 +96,27 @@ public class LocationAssignmentsTest{
 	Location[][] l=new Location[5][5];
 	l=a.getBoard();
 	a.updateLocation(l[0][1]);
-	String x=a.getcodename().get(1)+",7";
+	String x=a.getcodename().get(1);
 	assertTrue(a.clue(x));
-	assertTrue(a.getCount()==7);
+	}	
+	
+	@Test
+	public void countTest5() throws FileNotFoundException, IOException,InvalidCountException{// test when the clue contain count number equals to zero
+	assign a=new assign();
+	assertTrue(a.count(2));
+	assertTrue(a.getCount()==2);
 	}	
 	
 	@Test(expected = InvalidCountException.class)
-	public void clueTest5() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number equals to zero
+	public void countTest6() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number less than zero
 	assign a=new assign();
-	CodenamesList c=new CodenamesList();
-	PersonAssignments p=new PersonAssignments();
-	a.gameStarted();
-	Location[][] l=new Location[5][5];
-	l=a.getBoard();
-	a.updateLocation(l[0][1]);
-	String x=a.getcodename().get(1)+",0";
-	a.clue(x);
-	}	
+	assertTrue(a.count(0));
+	}
 	
 	@Test(expected = InvalidCountException.class)
-	public void clueTest6() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number less than zero
+	public void countTest7() throws FileNotFoundException, IOException, InvalidCountException{// test when the clue contain count number less than zero
 	assign a=new assign();
-	CodenamesList c=new CodenamesList();
-	PersonAssignments p=new PersonAssignments();
-	a.gameStarted();
-	Location[][] l=new Location[5][5];
-	l=a.getBoard();
-	a.updateLocation(l[0][1]);
-	String x=a.getcodename().get(1)+",-1";
-	a.clue(x);
+	assertTrue(a.count(-1));
 	}
 }
 

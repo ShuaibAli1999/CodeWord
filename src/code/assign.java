@@ -237,19 +237,13 @@ public class assign {
 	 * @return boolean value that indicate whether clue is legal or illegal.
 	 * @throws InvalidCountException 
 	 */
-	public boolean clue(String aClue) throws InvalidCountException {//passing in one word and one number for a clue, separate by comma.
-		String[] x= aClue.split(",");//try to separate the sentence into words.
+	public boolean clue(String aClue) {//passing in one word  for a clue.
 		boolean legal=true;
-		for(String s:x) {
 			for(String c:Reveal.keySet()) {
-				if(s.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
+				if(aClue.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
 					legal=true;
-					this.count = Integer.parseInt(x[1]);
-					if(count<0||count==0) {
-						throw new InvalidCountException();
-					}
 				}
-				if(s.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
+				if(aClue.equals(c)&&Reveal.get(c)==false) {//if clue has words same as codename that is not revealed if illegal.
 					this.count = -1;
 					if(turnCount%2==1) {//if clue is illegal then the team's turn is forfeit
 						turnCount++;
@@ -259,17 +253,22 @@ public class assign {
 						}
 					return false;
 				}
-				if(s.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
-					this.count = Integer.parseInt(x[1]);
-					if(count<0||count==0) {
-						throw new InvalidCountException();
-					}
+				if(aClue.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
 					legal=true;
 				}
-			}
 		}
 		return legal;
 	}
+	
+	public boolean count(int countnum) throws InvalidCountException{
+		boolean legal=true;
+		if(countnum<0||countnum==0) {
+			throw new InvalidCountException();
+		}
+		this.count=countnum;
+		return legal;
+	}
+	
 	/**
 	 * get's the value of count
 	 * @return the value of count
