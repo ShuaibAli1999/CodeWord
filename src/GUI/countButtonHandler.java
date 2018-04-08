@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import code.InvalidCountException;
 import code.assign;
 
 public class countButtonHandler implements ActionListener{
@@ -17,12 +18,30 @@ public class countButtonHandler implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(a.clue(gui.countTF.getText())) {
-			gui.valid=true;
-			gui.Entered=true;
-		}else {
-			gui.valid=false;
-			gui.Entered=true;
+		boolean valid=true;
+		int x=0;
+		try {
+		   x = Integer.parseInt(gui.countTF.getText());
+		} catch (NumberFormatException e) {
+		    valid=false;
+		}
+		if(valid) {
+		try {
+			if(a.count(x)){
+				gui.validCount=true;
+				gui.CountEntered=true;
+			}else {
+				gui.validCount=false;
+				gui.CountEntered=true;
+			}
+		} catch (InvalidCountException e) {
+			gui.validCount=false;
+			gui.CountEntered=true;
+		}
+		}
+		else {
+			gui.validCount=false;
+			gui.CountEntered=true;
 		}
 		gui.update();
 	}

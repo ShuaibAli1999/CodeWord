@@ -41,10 +41,12 @@ public class GUI implements Observer {
 	protected JTextField clueTF;
 	protected JTextField countTF;
 	protected int count;
-	protected boolean valid=false;
+	protected boolean validClue=false;
+	protected boolean validCount=false;
 	public boolean st = false;
 	public boolean assas = false;
-	protected boolean Entered=false;
+	protected boolean ClueEntered=false;
+	protected boolean CountEntered=false;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -178,21 +180,31 @@ public class GUI implements Observer {
 			top.revalidate();
 			top.repaint();
 		}
-		if(valid&&Entered) {
+		if(validClue&&ClueEntered) {
 			clueP.removeAll();
-			countP.removeAll();
 			JLabel clue=new JLabel(clueTF.getText());
 			setLabelProperties(clue);
 			clueP.add(clue);
 			clueP.revalidate();
 			clueP.repaint();
+			ClueEntered=false;
+		}
+		else if(validClue!=true&&ClueEntered){
+			JOptionPane.showMessageDialog(null, "Invalid clue! Please enter again.");
+			ClueEntered=false;
+		}
+		if(validCount&&CountEntered) {
+			countP.removeAll();
+			JLabel count=new JLabel(countTF.getText());
+			setLabelProperties(count);
+			countP.add(count);
 			countP.revalidate();
 			countP.repaint();
-			Entered=false;
+			CountEntered=false;
 		}
-		else if(valid!=true&&Entered){
-			JOptionPane.showMessageDialog(null, "Invalid clue! Please enter again.");
-			Entered=false;
+		else if(validCount!=true&&CountEntered){
+			JOptionPane.showMessageDialog(null, "Invalid count number! Please enter again.");
+			CountEntered=false;
 		}
 //		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
 //			assas=false;
