@@ -8,7 +8,7 @@ public class newCloseProgramHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		System.exit(10);
+		System.exit(0);
 	}
 
 }
