@@ -17,10 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
-import javax.swing.Timer;
 import GUI.clueButtonHandler;
 import code.InvalidCountException;
-import code.Model;
 import code.Observer;
 import code.assign;
 import Driver.Driver;
@@ -29,15 +27,15 @@ public class GUI implements Observer {
 	
 	private assign _model;
 	private Driver _windowHolder;
+	private JPanel _mainPanel;
 	private JPanel assignPanel;
 	private JPanel buttom;
-	private JLabel whosTurn; 
 	private JPanel top;
 	private JPanel Clue;
-	protected String clue;
 	private JPanel clueP;
 	private JPanel countP;
 	private JPanel enterP;
+	protected String clue;
 	protected JTextField clueTF;
 	protected JTextField countTF;
 	protected int count;
@@ -57,9 +55,11 @@ public class GUI implements Observer {
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
-		JPanel _mainPanel = mp;
+		_mainPanel = mp;
+		
 		top = new JPanel();
 		_mainPanel.add(top);
+		
 		enterP=new JPanel();
 		clueTF= new JTextField("Enter one word for clue",20);
 		b=new JButton("Ok");
@@ -72,6 +72,7 @@ public class GUI implements Observer {
 		enterP.add(countTF);
 		enterP.add(b1);
 		_mainPanel.add(enterP);
+		
 		Clue=new JPanel();
 		clueP=new JPanel();
 		countP=new JPanel();
@@ -86,41 +87,62 @@ public class GUI implements Observer {
 		Clue.add(countP);
 		_mainPanel.add(Clue);
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
-		GridLayout experimentLayout = new GridLayout(5,5);
+		
+		JMenuBar menuBar=new JMenuBar();
+		JMenu menu = new JMenu("File");
+		setMenuProperties(menu);
+		menuBar.add(menu);
+		JMenuItem menuItem = new JMenuItem("New Game");
+		menuItem.addActionListener(new newGameHandler(this));
+		setMenuItemProperties(menuItem);
+		menu.add(menuItem);
+		JMenuItem menuItem1 = new JMenuItem("Exit");
+		menuItem1.addActionListener(new newCloseProgramHandler());
+		setMenuItemProperties(menuItem1);
+		menu.add(menuItem1);
+		mp.add(menuBar);
+		_windowHolder.getwindow().setJMenuBar(menuBar);	
+		
 		buttom = new JPanel();
 		JButton pass = new JButton("Pass");
 		pass.addActionListener(new passHandler(_model,this));
 		setButtonProperties(pass);
 		buttom.add(pass);
 		assignPanel=new JPanel();
-		assignPanel.setLayout(experimentLayout);
+		assignPanel.setLayout(new GridLayout(5,5));
 		_mainPanel.add(assignPanel);
-		JMenuBar menuBar;
-		JMenu menu;
-		JMenuItem menuItem;
-		JMenuItem menuItem1;
-		menuBar = new JMenuBar();
-		mp.add(menuBar);
-		menu = new JMenu("File");
-		setMenuProperties(menu);
-		menuBar.add(menu);
-		menuItem = new JMenuItem("New Game");
-		menuItem.addActionListener(new newGameHandler(this));
-		setMenuItemProperties(menuItem);
-		menu.add(menuItem);
-		menuItem1 = new JMenuItem("Exit");
-		menuItem1.addActionListener(new newCloseProgramHandler());
-		setMenuItemProperties(menuItem1);
-		menu.add(menuItem1);
-		_mainPanel.add(buttom);
-		_windowHolder.getwindow().setJMenuBar(menuBar);		
+		mp.add(buttom);
+		
 		_model.gameStarted();
 		_model.addObserver(this);
 }
 
 	@Override
-	public void update() {
+	public void update(){
+		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
+			assas=false;
+			if(_model.winningState()==-1) {
+				assignPanel.removeAll();
+				assignPanel.add(new JLabel("RED TEAM WINS"));
+				}
+			if(_model.winningState()==1) {
+			assignPanel.removeAll();
+			assignPanel.add(new JLabel("BLUE TEAM WINS"));
+			}
+			if(_model.winningState()==0) {
+				assignPanel.removeAll();
+				assignPanel.add(new JLabel(_model.teamWon()+""+ " "+ "won"));
+			}
+			updateJFrameIfNotHeadless();
+			}else {
 		if(num>0) {
+			if(updateCount) {
+				countP.removeAll();
+				JLabel count=new JLabel(""+this.count);
+				setLabelProperties(count);
+				countP.add(count);
+				updateCount=false;
+			}
 		if(turn!=_model.turn()){
 			if(_model.turn()==1) {
 				JOptionPane.showMessageDialog(null, "BLUE TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
@@ -138,28 +160,15 @@ public class GUI implements Observer {
 			JOptionPane.showMessageDialog(null, "Game Started! Red team spymaster please enter a clue and a count number.");
 		}
 		num=num+1;
-		assignPanel.removeAll();
-		ArrayList<String> codenames = _model.getcodename();
-		for (int i=0; i<codenames.size(); i=i+1) {
-			JButton b = new JButton(""+codenames.get(i));
-			setButtonProperties(b);
-			if(_model.getReveal().get(codenames.get(i))==true) {
-				JLabel label = new JLabel(""+_model.getAssignedCodeNameandValues().get(codenames.get(i)));
-				setLabelProperties(label);
-				assignPanel.add(label);
-			}
-			else {
-			assignPanel.add(b);
-			b.addActionListener(new codenameButtonHandler(_model,this,codenames.get(i)));
-			}
-			assignPanel.revalidate();
-			assignPanel.repaint();
-		}
 		if(st==true) {
 			try {
 				_model.gameStarted();
 				clueP.removeAll();
 				countP.removeAll();
+				clueTF.setEditable(true);
+				countTF.setEditable(true);
+				b.setEnabled(true);
+				b1.setEnabled(true);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -168,7 +177,6 @@ public class GUI implements Observer {
 				e.printStackTrace();
 			}
 			assignPanel.removeAll();
-			
 			ArrayList<String> c = _model.getcodename();
 			for (int i=0; i<c.size(); i=i+1) {
 				JButton b = new JButton(""+c.get(i));
@@ -176,31 +184,23 @@ public class GUI implements Observer {
 				assignPanel.add(b);
 				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
 			}
-			assignPanel.revalidate();
-			assignPanel.repaint();
 			st=false;
 		}
 		if(_model.turn()==1) {
 			top.removeAll();
 			top.add(new JLabel("Red Turn"));
 			turn=_model.turn();
-			top.revalidate();
-			top.repaint();
 		}
 		else {
 			top.removeAll();
 			top.add(new JLabel("Blue Turn"));
 			turn=_model.turn();
-			top.revalidate();
-			top.repaint();
 		}
 		if(validClue&&ClueEntered) {
 			clueP.removeAll();
 			JLabel clue=new JLabel(clueTF.getText());
 			setLabelProperties(clue);
 			clueP.add(clue);
-			clueP.revalidate();
-			clueP.repaint();
 			clueTF.setText("");
 			clueTF.setEditable(false);
 			b.setEnabled(false);
@@ -216,8 +216,6 @@ public class GUI implements Observer {
 			this.count=Integer.parseInt(countTF.getText());
 			setLabelProperties(count);
 			countP.add(count);
-			countP.revalidate();
-			countP.repaint();
 			countTF.setText("");
 			countTF.setEditable(false);
 			b1.setEnabled(false);
@@ -227,36 +225,51 @@ public class GUI implements Observer {
 			JOptionPane.showMessageDialog(null, "Count number cannot be a string, or less than or equals to zero. Please enter again.");
 			CountEntered=false;
 		}
-		if(updateCount) {
-			countP.removeAll();
-			JLabel count=new JLabel(""+this.count);
-			setLabelProperties(count);
-			countP.add(count);
-			countP.revalidate();
-			countP.repaint();
-			updateCount=false;
+		assignPanel.removeAll();
+		ArrayList<String> codenames = _model.getcodename();
+		if(clueP.getComponentCount()==0||countP.getComponentCount()==0) {
+			for (int i=0; i<codenames.size(); i=i+1) {
+				JLabel b = new JLabel(""+codenames.get(i));
+				setLabelProperties(b);
+				if(_model.getAssignedCodeNameandValues().get(codenames.get(i))=="red agent") {
+						b.setBackground(Color.RED);
+					}
+				if(_model.getAssignedCodeNameandValues().get(codenames.get(i))=="blue agent") {
+						b.setBackground(Color.BLUE);
+					}
+				if(_model.getAssignedCodeNameandValues().get(codenames.get(i))=="assassin") {
+						b.setBackground(Color.DARK_GRAY);
+					}
+				if(_model.getReveal().get(codenames.get(i))==true) {
+						JLabel label = new JLabel(""+_model.getAssignedCodeNameandValues().get(codenames.get(i)));
+						setLabelProperties(label);
+						assignPanel.add(label);
+					}else {
+						assignPanel.add(b);
+					}
 		}
-//		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
-//			assas=false;
-//		if(_model.winningState()==-1) {
-//			assignPanel.removeAll();
-//			assignPanel.add(new JLabel("RED TEAM WINS"));
-//			assignPanel.revalidate();
-//			assignPanel.repaint();
-//			}
-//		if(_model.winningState()==1) {
-//		assignPanel.removeAll();
-//		assignPanel.add(new JLabel("BLUE TEAM WINS"));
-//		assignPanel.revalidate();
-//		assignPanel.repaint();
-//		}
-//		if(_model.winningState()==0) {
-//			assignPanel.removeAll();
-//			assignPanel.add(new JLabel(_model.teamWon()+""+ " "+ "won"));
-//			assignPanel.revalidate();
-//			assignPanel.repaint();
-//		}
-//		}
+			}
+		else {
+		for (int i=0; i<codenames.size(); i=i+1) {
+			JButton b = new JButton(""+codenames.get(i));
+			setButtonProperties(b);
+			if(_model.getReveal().get(codenames.get(i))==true) {
+				JLabel label = new JLabel(""+_model.getAssignedCodeNameandValues().get(codenames.get(i)));
+				setLabelProperties(label);
+				assignPanel.add(label);
+			}
+			else {
+			assignPanel.add(b);
+			b.addActionListener(new codenameButtonHandler(_model,this,codenames.get(i)));
+			}
+		}}
+		updateJFrameIfNotHeadless();}
+	}
+
+	public void updateJFrameIfNotHeadless() {
+		if (_windowHolder != null) {
+			_windowHolder.updateJFrame();
+		}
 	}
 
 	public void setMenuProperties(JMenu menu) {
@@ -281,7 +294,6 @@ public class GUI implements Observer {
 		button.setOpaque(true);
 		button.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
-
 	public void setLabelProperties(JLabel label) {
 		label.setFont(new Font("Courier", Font.BOLD, _model.font));
 		label.setBackground(Color.WHITE);
@@ -289,4 +301,6 @@ public class GUI implements Observer {
 		label.setOpaque(true);
 		label.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	
+	
 }

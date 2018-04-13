@@ -15,7 +15,6 @@ public class newGameHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		gui.st=true;
 		gui.update();
-		
 	}
 
 }

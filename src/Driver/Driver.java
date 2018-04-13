@@ -38,7 +38,6 @@ public class Driver implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			_window.setVisible(true);
 			_window.pack();
 			_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	

@@ -32,7 +32,6 @@ public class clueButtonHandler implements ActionListener{
 						gui.validClue=false;
 						gui.ClueEntered=true;
 					}}
-					
 				}
 		else {
 			gui.validClue=false;

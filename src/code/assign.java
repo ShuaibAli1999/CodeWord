@@ -25,7 +25,7 @@ public class assign {
 	/**
 	 * the font of the words in GUI
 	 */
-	public int font =33;
+	public int font =20;
 	/**
 	 * the arraylist of codenames to be assigned to a location instance
 	 */
