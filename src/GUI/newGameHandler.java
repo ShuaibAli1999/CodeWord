@@ -13,7 +13,6 @@ public class newGameHandler implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		gui.num = 0;
 		gui.st=true;
 		gui.update();
 	}

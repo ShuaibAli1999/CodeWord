@@ -16,7 +16,7 @@ public class memeMagicHandler implements WindowListener {
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -32,7 +32,6 @@ public class memeMagicHandler implements WindowListener {
 		f.setVisible(true);
 		f.addWindowListener(this);
 		f2.addWindowListener(this);
-		
 	}
 
 	@Override
@@ -44,19 +43,28 @@ public class memeMagicHandler implements WindowListener {
 	@Override
 	public void windowDeiconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<10;i++) {
+		GUI g = new GUI();
+		JFrame f = new JFrame();
+		f.add(new JLabel(g.getMat()));
+		f.pack();
+		f.setVisible(true);			
+		JFrame f2 = new JFrame();
+		f.add(new JLabel(g.getMat()));
+		f.pack();
+		f.setVisible(true);
+		f.addWindowListener(this);
+		f2.addWindowListener(this);}
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 }

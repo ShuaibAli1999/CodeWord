@@ -145,6 +145,40 @@ public class GUI implements Observer {
 
 	@Override
 	public void update(){
+		if(st==true) {
+			try {
+				_model.gameStarted();
+				clueP.removeAll();
+				countP.removeAll();
+				clueTF.setEditable(true);
+				countTF.setEditable(true);
+				b.setEnabled(true);
+				b1.setEnabled(true);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			assignPanel.removeAll();
+			ArrayList<String> c = _model.getcodename();
+			for (int i=0; i<c.size(); i=i+1) {
+				JButton b = new JButton(""+c.get(i));
+				setButtonProperties(b);
+				assignPanel.add(b);
+				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
+			}
+			st=false;
+			num=0;
+			validClue=false;
+			validCount=false;
+			assas = false;
+			ClueEntered=false;
+			CountEntered=false;
+			switchTurn=false;
+			updateCount=false;
+		}
 		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {
 			assas=false;
 			if(_model.winningState()==-1) {
@@ -186,35 +220,7 @@ public class GUI implements Observer {
 			JOptionPane.showMessageDialog(null, "Game Started! Red team spymaster please enter a clue and a count number.");
 		}
 		num=num+1;
-		if(st==true) {
-			try {
-				_model.gameStarted();
-				clueP.removeAll();
-				countP.removeAll();
-				clueTF.setEditable(true);
-				countTF.setEditable(true);
-				b.setEnabled(true);
-				b1.setEnabled(true);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			assignPanel.removeAll();
-			ArrayList<String> c = _model.getcodename();
-			for (int i=0; i<c.size(); i=i+1) {
-				JButton b = new JButton(""+c.get(i));
-				setButtonProperties(b);
-				assignPanel.add(b);
-				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
-			}
-			
-			st=false;
-			updateJFrameIfNotHeadless();
-			
-		}
+		
 		if(_model.turn()==1) {
 			top.removeAll();
 			top.add(new JLabel("Red Turn"));
@@ -236,7 +242,7 @@ public class GUI implements Observer {
 			ClueEntered=false;
 		}
 		else if(validClue!=true&&ClueEntered){
-			JOptionPane.showMessageDialog(null, "Clue cannot be a number, more than one words, or codenames that is not revealed. Please enter again.");
+			JOptionPane.showMessageDialog(null, "Clue cannot be a number, more than one word, or codenames that is not revealed. Please enter again.");
 			ClueEntered=false;
 		}
 		if(validCount&&CountEntered) {

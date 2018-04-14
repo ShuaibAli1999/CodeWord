@@ -192,6 +192,7 @@ public class assign {
 		}
 		if(assignedCodeName.get(theLocation.getName())=="innocent bystander") {
 			turnCount++;
+			return false;
 		}
 		}
 		turnCount++;
@@ -241,6 +242,9 @@ public class assign {
 	 * @throws InvalidCountException 
 	 */
 	public boolean clue(String aClue) {//passing in one word  for a clue.
+		if(aClue=="") {
+			return false;
+		}
 		boolean legal=true;
 			for(String c:Reveal.keySet()) {
 				if(aClue.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
