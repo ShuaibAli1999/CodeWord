@@ -57,11 +57,11 @@ public class assign {
 	/**
 	 * total number of red agents left to be revealed
 	 */
-	private int redTotal;
+	public int redTotal;
 	/**
 	 * total number of blue agents left to be revealed
 	 */
-	private int blueTotal;
+	public int blueTotal;
 	/**
 	 * creates a matrix for all the codenames
 	 */

@@ -299,6 +299,8 @@ public class GUI implements Observer {
 			}
 		}}
 		updateJFrameIfNotHeadless();}
+		System.out.println(_model.getRedTotal()+" red");
+		System.out.println(_model.getBlueTotal()+" blue");
 	}
 
 	public void updateJFrameIfNotHeadless() {
