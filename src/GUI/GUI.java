@@ -46,7 +46,6 @@ public class GUI implements Observer {
 	protected String clue;
 	protected JTextField clueTF;
 	protected JTextField countTF;
-	protected int count;
 	protected boolean validClue=false;
 	protected boolean validCount=false;
 	public boolean st = false;
@@ -58,7 +57,7 @@ public class GUI implements Observer {
 	private JButton b;
 	private JButton b1;
 	private int turn;
-	private int num=0;
+	protected int num=0;
 	
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
@@ -104,7 +103,7 @@ public class GUI implements Observer {
 		menuItem.addActionListener(new newGameHandler(this));
 		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
-		JMenuItem fun = new JMenuItem("Super Happy Family Fun Wish Button");
+		JMenuItem fun = new JMenuItem("");
 		fun.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent event) {
@@ -158,14 +157,14 @@ public class GUI implements Observer {
 			}
 			if(_model.winningState()==0) {
 				assignPanel.removeAll();
-				assignPanel.add(new JLabel(_model.teamWon()+""+ " "+ "won"));
+				assignPanel.add(new JLabel(_model.teamWon()+""+ " "+ "WINS"));
 			}
 			updateJFrameIfNotHeadless();
 			}else {
 		if(num>0) {
 			if(updateCount) {
 				countP.removeAll();
-				JLabel count=new JLabel(""+this.count);
+				JLabel count=new JLabel(""+_model.count);
 				setLabelProperties(count);
 				countP.add(count);
 				updateCount=false;
@@ -211,7 +210,10 @@ public class GUI implements Observer {
 				assignPanel.add(b);
 				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
 			}
+			
 			st=false;
+			updateJFrameIfNotHeadless();
+			
 		}
 		if(_model.turn()==1) {
 			top.removeAll();
@@ -240,7 +242,7 @@ public class GUI implements Observer {
 		if(validCount&&CountEntered) {
 			countP.removeAll();
 			JLabel count=new JLabel(countTF.getText());
-			this.count=Integer.parseInt(countTF.getText());
+			_model.count=Integer.parseInt(countTF.getText());
 			setLabelProperties(count);
 			countP.add(count);
 			countTF.setText("");

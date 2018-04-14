@@ -69,7 +69,7 @@ public class assign {
 	/**
 	 * keeps track of the number of guesses a team has after their spymaster has given a clue
 	 */
-	private int count=20;
+	public int count=0;
 	
 	public assign() {
 		redTotal = 9;
@@ -163,7 +163,7 @@ public class assign {
 	 */
 	public boolean updateLocation(Location theLocation) {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
-		if(count>-1) {
+		if(count>0) {
 		if(turnCount%2!= 0) {//if it is reds turn
 		if(assignedCodeName.get(theLocation.getName())=="red agent") {
 			count--;
@@ -349,11 +349,11 @@ public class assign {
 	 */
 	public String teamWon() {
 		if(winningState()==0) {
-			if(turnCount%2!=0) {
-				return "blue team";
+			if(turnCount%2==1) {
+				return "RED TEAM";
 			}
 			if(turnCount%2==0) {
-				return "red team";
+				return "BLUE TEAM";
 			}
 		}
 		return null;
