@@ -2,13 +2,19 @@ package GUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -25,7 +31,9 @@ import Driver.Driver;
 
 public class GUI implements Observer {
 	
+	private JFrame secondFrame = new JFrame("My 2nd Window!");
 	private assign _model;
+	private ImageIcon mat= new ImageIcon("MatthewSimpson.png");
 	private Driver _windowHolder;
 	private JPanel _mainPanel;
 	private JPanel assignPanel;
@@ -96,6 +104,21 @@ public class GUI implements Observer {
 		menuItem.addActionListener(new newGameHandler(this));
 		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
+		JMenuItem fun = new JMenuItem("Super Happy Family Fun Wish Button");
+		fun.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			secondFrame.add(new JLabel(mat));
+			secondFrame.pack();
+			secondFrame.setVisible(true);
+			
+			secondFrame.addWindowListener(new memeMagicHandler());
+			
+		
+		
+		}});
+		menu.add(fun);
+		
 		JMenuItem menuItem1 = new JMenuItem("Exit");
 		menuItem1.addActionListener(new newCloseProgramHandler());
 		setMenuItemProperties(menuItem1);
@@ -116,6 +139,10 @@ public class GUI implements Observer {
 		_model.gameStarted();
 		_model.addObserver(this);
 }
+
+	public GUI() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void update(){
@@ -279,6 +306,14 @@ public class GUI implements Observer {
 		menu.setOpaque(true);
 		menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	
+	public void setFunMenuProperties(JMenu menu) {
+		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
+		menu.setBackground(Color.WHITE);
+		menu.setForeground(Color.BLACK);
+		menu.setOpaque(true);
+		menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
+	}
 	public void setMenuItemProperties(JMenuItem item) {
 		item.setFont(new Font("Courier", Font.BOLD, _model.font));
 		item.setBackground(Color.WHITE);
@@ -301,6 +336,10 @@ public class GUI implements Observer {
 		label.setOpaque(true);
 		label.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	public ImageIcon getMat() {
+		return mat;
+	}
+	
 	
 	
 }
