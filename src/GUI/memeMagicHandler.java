@@ -5,7 +5,9 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+/*
+ * This class is where the memes happens. A window pops up which is un-closable and replicates on minimize button press. 
+ */
 public class memeMagicHandler implements WindowListener {
 	@Override
 	public void windowActivated(WindowEvent e) {

@@ -2,7 +2,9 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/*
+ * Class that closes the game
+ */
 public class newCloseProgramHandler implements ActionListener {
 
 	@Override

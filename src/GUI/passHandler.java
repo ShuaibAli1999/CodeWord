@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import code.assign;
-
+/*
+ * handles the pass button. allows the player to change the turn.
+ */
 public class passHandler implements ActionListener {
 	private assign _m;
 	private GUI gui;

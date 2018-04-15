@@ -28,7 +28,9 @@ import code.InvalidCountException;
 import code.Observer;
 import code.assign;
 import Driver.Driver;
-
+/*
+ * GUI class which represents the game screen. 
+ */
 public class GUI implements Observer {
 	
 	private JFrame secondFrame = new JFrame("My 2nd Window!");
@@ -58,7 +60,10 @@ public class GUI implements Observer {
 	private JButton b1;
 	private int turn;
 	protected int num=0;
-	
+	/*
+	 * sets up the initial framework for the GUI. Adds the JText fields, JPanels, and JButtons necessary for the game to function.
+	 * Update handles further changes.
+	 */
 	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
@@ -142,7 +147,12 @@ public class GUI implements Observer {
 	public GUI() {
 		// TODO Auto-generated constructor stub
 	}
-
+/*
+ * (non-Javadoc)
+ * @see code.Observer#update()
+ * Update deals with everything that needs to be changed after an event occurs. As a result it updates the GUI after any button press happens 
+ * or after any number changes. In addition it updates the GUI after the spymaster has inputed his information. 
+ */
 	@Override
 	public void update(){
 		if(st==true) {
@@ -302,13 +312,17 @@ public class GUI implements Observer {
 		System.out.println(_model.getRedTotal()+" red");
 		System.out.println(_model.getBlueTotal()+" blue");
 	}
-
+/*
+ * Updates the JFrame so changes are displayed.
+ */
 	public void updateJFrameIfNotHeadless() {
 		if (_windowHolder != null) {
 			_windowHolder.updateJFrame();
 		}
 	}
-
+	/*
+	 * sets the menu properties
+	 */
 	public void setMenuProperties(JMenu menu) {
 		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
 		menu.setBackground(Color.WHITE);
@@ -316,7 +330,9 @@ public class GUI implements Observer {
 		menu.setOpaque(true);
 		menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
-	
+	/*
+	 * sets the fun menu properties
+	 */
 	public void setFunMenuProperties(JMenu menu) {
 		menu.setFont(new Font("Courier", Font.BOLD, _model.font));
 		menu.setBackground(Color.WHITE);
@@ -324,6 +340,9 @@ public class GUI implements Observer {
 		menu.setOpaque(true);
 		menu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	/*
+	 * sets the Menu Item properties
+	 */
 	public void setMenuItemProperties(JMenuItem item) {
 		item.setFont(new Font("Courier", Font.BOLD, _model.font));
 		item.setBackground(Color.WHITE);
@@ -331,7 +350,9 @@ public class GUI implements Observer {
 		item.setOpaque(true);
 		item.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
-	
+	/*
+	 * Sets the button properties
+	 */
 	public void setButtonProperties(JButton button) {
 		button.setFont(new Font("Courier", Font.BOLD, _model.font));
 		button.setBackground(Color.WHITE);
@@ -339,6 +360,9 @@ public class GUI implements Observer {
 		button.setOpaque(true);
 		button.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	/*
+	 * Sets the Label properties 
+	 */
 	public void setLabelProperties(JLabel label) {
 		label.setFont(new Font("Courier", Font.BOLD, _model.font));
 		label.setBackground(Color.WHITE);
@@ -346,6 +370,9 @@ public class GUI implements Observer {
 		label.setOpaque(true);
 		label.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.DARK_GRAY, Color.LIGHT_GRAY));
 	}
+	/*
+	 * helpful for creating the memes
+	 */
 	public ImageIcon getMat() {
 		return mat;
 	}

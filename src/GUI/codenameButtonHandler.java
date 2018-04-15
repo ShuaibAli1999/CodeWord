@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 
 import code.Location;
 import code.assign;
-
+/*
+ * This class handles code name button presses.It takes GUI, assign, and the code name String as parameters to update the GUI 
+ * with what was revealed. In addition it also updates the count. 
+ */
 public class codenameButtonHandler implements ActionListener{
 	private GUI gui;
 	private assign _m;
