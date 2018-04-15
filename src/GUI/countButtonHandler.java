@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 
 import code.InvalidCountException;
 import code.assign;
-
+/*
+ * Handles the count button, and checking whether the entered count is a string or word, and updating boolean value in GUI.
+ */
 public class countButtonHandler implements ActionListener{
 	private GUI gui;
 	private assign a;

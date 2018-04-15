@@ -32,33 +32,105 @@ import Driver.Driver;
  * GUI class which represents the game screen. 
  */
 public class GUI implements Observer {
-	
+	/*
+	 * The window that holds easter egg.
+	 */
 	private JFrame secondFrame = new JFrame("My 2nd Window!");
+	/*
+	 * The class that hold and keep trace of all the data information of the game. 
+	 */
 	private assign _model;
+	/*
+	 * The picture for meme.
+	 */
 	private ImageIcon mat= new ImageIcon("MatthewSimpson.png");
+	/*
+	 * The main window that displays all the feature of the game. 
+	 */
 	private Driver _windowHolder;
+	/*
+	 * The main panel that holds all the other panels, labels, and buttons. 
+	 */
 	private JPanel _mainPanel;
+	/*
+	 * The panel that holds the codenames and revealed agents. 
+	 */
 	private JPanel assignPanel;
+	/*
+	 * The panel that holds the pass button for changing turn.
+	 */
 	private JPanel buttom;
+	/*
+	 * The panel that holds information showing which turn it is. 
+	 */
 	private JPanel top;
+	/*
+	 * The panel that holds the clue and count panels. 
+	 */
 	private JPanel Clue;
+	/*
+	 * The panel that holds the valid clue that is entered by the spymaster. 
+	 */
 	private JPanel clueP;
+	/*
+	 * The panel that holds the valid count that is entered by the spymaster. 
+	 */
 	private JPanel countP;
+	/*
+	 * The panel that holds the textfield for clue and count. 
+	 */
 	private JPanel enterP;
-	protected String clue;
+	/*
+	 * The textfield for spymaster to enter the clue. 
+	 */
 	protected JTextField clueTF;
+	/*
+	 * The textfield for spymaster to enter the count.
+	 */
 	protected JTextField countTF;
+	/*
+	 * The boolean value that keep track of whether the entered clue is valid or invalid.
+	 */
 	protected boolean validClue=false;
+	/*
+	 * The boolean value that keep track of whether the entered count is valid or invalid.
+	 */
 	protected boolean validCount=false;
+	/*
+	 * The boolean value that keep track of whether the NewGame button is pressed or not.
+	 */
 	public boolean st = false;
+	/*
+	 * The boolean value that keep track of whether the assassin is revealed or not.
+	 */
 	public boolean assas = false;
+	/*
+	 * The boolean value that keep track of whether clue is entered or not.
+	 */
 	protected boolean ClueEntered=false;
+	/*
+	 * The boolean value that keep track of whether count is entered or not.
+	 */
 	protected boolean CountEntered=false;
-	protected boolean switchTurn=false;
+	/*
+	 * The boolean value that keep track of whether the count should update or not.
+	 */
 	protected boolean updateCount=false;
+	/*
+	 * The button for clue textfield.
+	 */
 	private JButton b;
+	/*
+	 * The button for count textfield.
+	 */
 	private JButton b1;
+	/*
+	 * The turn value that is alias to the turn value in assign class.
+	 */
 	private int turn;
+	/*
+	 * The value that only for the first pop up window for new game.
+	 */
 	protected int num=0;
 	/*
 	 * sets up the initial framework for the GUI. Adds the JText fields, JPanels, and JButtons necessary for the game to function.
@@ -186,7 +258,6 @@ public class GUI implements Observer {
 			assas = false;
 			ClueEntered=false;
 			CountEntered=false;
-			switchTurn=false;
 			updateCount=false;
 		}
 		if(_model.getBlueTotal()==0 || _model.getRedTotal()==0|| assas==true) {

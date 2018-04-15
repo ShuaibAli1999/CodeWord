@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import code.assign;
-
+/*
+ * Handles the clue button, and checking whether there is one word or more, and updating boolean value in GUI.
+ */
 public class clueButtonHandler implements ActionListener{
 	private GUI gui;
 	private assign a;
