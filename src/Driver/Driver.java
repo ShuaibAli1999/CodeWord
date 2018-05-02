@@ -8,10 +8,12 @@ import javax.swing.SwingUtilities;
 
 import code.Model;
 import code.assign;
+import code.assign2;
 import GUI.GUI;
 
 public class Driver implements Runnable {
 	private assign _model;
+	private assign2 _model2;
 	private JFrame _window;
 	private JPanel _mainPanel;
 	public Driver(assign m) {
@@ -33,7 +35,7 @@ public class Driver implements Runnable {
 			_window.getContentPane().add(_mainPanel);
 
 			try {
-				new GUI(_model, _mainPanel,this);
+				new GUI(_model, _mainPanel,this,_model2);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

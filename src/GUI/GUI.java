@@ -27,6 +27,7 @@ import GUI.clueButtonHandler;
 import code.InvalidCountException;
 import code.Observer;
 import code.assign;
+import code.assign2;
 import Driver.Driver;
 /*
  * GUI class which represents the game screen. 
@@ -136,7 +137,7 @@ public class GUI implements Observer {
 	 * sets up the initial framework for the GUI. Adds the JText fields, JPanels, and JButtons necessary for the game to function.
 	 * Update handles further changes.
 	 */
-	public GUI(assign m, JPanel mp, Driver driver)throws FileNotFoundException, IOException{
+	public GUI(assign m, JPanel mp, Driver driver, assign2 m2)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
 		_mainPanel = mp;
