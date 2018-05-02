@@ -54,6 +54,8 @@ public class assign2 {
 	 *  placeholder int used to check if there was a change in number of blue agents revealed
 	 */
 	private int count2blue;
+	
+	private int count2green;
 	/**
 	 * total number of red agents left to be revealed
 	 */
@@ -62,6 +64,8 @@ public class assign2 {
 	 * total number of blue agents left to be revealed
 	 */
 	public int blueTotal;
+	
+	public int greenTotal;
 	/**
 	 * creates a matrix for all the codenames
 	 */
@@ -72,13 +76,15 @@ public class assign2 {
 	public int count=0;
 	
 	public assign2() {
-		redTotal = 9;
-		blueTotal = 8;
+		redTotal = 6;
+		blueTotal = 5;
+		greenTotal=5;
 		codenames =new ArrayList<String>();
 		person =  new ArrayList<String>();
 		turnCount =  1;
 		count2red = 0;
 		count2blue = 0;
+		count2green = 0;
 		board = new Location[5][5];
 		_observers=new ArrayList<>();
 	}
@@ -126,10 +132,11 @@ public class assign2 {
 	 */
 	public void gameStarted() throws FileNotFoundException, IOException{//set up for the game.
 		CodenamesList cod = new CodenamesList();
-		PersonAssignments per=new PersonAssignments();
+		PersonAssignments2 per=new PersonAssignments2();
 		turnCount=1;//red team's turn
-		redTotal = 9;
-		blueTotal = 8;
+		redTotal = 6;
+		blueTotal = 5;
+		greenTotal = 5;
 		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
