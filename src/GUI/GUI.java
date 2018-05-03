@@ -41,6 +41,7 @@ public class GUI implements Observer {
 	 * The class that hold and keep trace of all the data information of the game. 
 	 */
 	private assign _model;
+	private assign2 _model2;
 	/*
 	 * The picture for meme.
 	 */
@@ -96,7 +97,7 @@ public class GUI implements Observer {
 	/*
 	 * The boolean value that keep track of whether the entered count is valid or invalid.
 	 */
-	protected boolean validCount=false;
+	protected boolean validCount=false; 
 	/*
 	 * The boolean value that keep track of whether the NewGame button is pressed or not.
 	 */
@@ -129,10 +130,14 @@ public class GUI implements Observer {
 	 * The turn value that is alias to the turn value in assign class.
 	 */
 	private int turn;
+	private int turn2=0;
 	/*
 	 * The value that only for the first pop up window for new game.
 	 */
 	protected int num=0;
+	protected int teamVersion=2;
+	private int teamV=2;
+	protected boolean assig2=false;
 	/*
 	 * sets up the initial framework for the GUI. Adds the JText fields, JPanels, and JButtons necessary for the game to function.
 	 * Update handles further changes.
@@ -140,6 +145,7 @@ public class GUI implements Observer {
 	public GUI(assign m, JPanel mp, Driver driver, assign2 m2)throws FileNotFoundException, IOException{
 		_windowHolder = driver;
 		_model = m;
+		_model2=m2;
 		_mainPanel = mp;
 		
 		top = new JPanel();
@@ -179,8 +185,16 @@ public class GUI implements Observer {
 		menuBar.add(menu);
 		JMenuItem menuItem = new JMenuItem("New Game");
 		menuItem.addActionListener(new newGameHandler(this));
+		JMenuItem menuItem2 = new JMenuItem("New 2-Team Version");
+		menuItem2.addActionListener(new version1ButtonHandler(this));
+		JMenuItem menuItem3 = new JMenuItem("New 3-Team Version");
+		menuItem3.addActionListener(new version2ButtonHandler(this));
 		setMenuItemProperties(menuItem);
 		menu.add(menuItem);
+		setMenuItemProperties(menuItem2);
+		menu.add(menuItem2);
+		setMenuItemProperties(menuItem3);
+		menu.add(menuItem3);
 		JMenuItem fun = new JMenuItem("");
 		fun.addActionListener(new ActionListener() {
 		@Override
@@ -189,10 +203,7 @@ public class GUI implements Observer {
 			secondFrame.pack();
 			secondFrame.setVisible(true);
 			
-			secondFrame.addWindowListener(new memeMagicHandler());
-			
-		
-		
+			secondFrame.addWindowListener(new memeMagicHandler());	
 		}});
 		menu.add(fun);
 		
@@ -205,16 +216,17 @@ public class GUI implements Observer {
 		
 		buttom = new JPanel();
 		JButton pass = new JButton("Pass");
-		pass.addActionListener(new passHandler(_model,this));
+		pass.addActionListener(new passHandler(_model,_model2,this));
 		setButtonProperties(pass);
 		buttom.add(pass);
 		assignPanel=new JPanel();
 		assignPanel.setLayout(new GridLayout(5,5));
 		_mainPanel.add(assignPanel);
-		mp.add(buttom);
-		
+		mp.add(buttom);	
 		_model.gameStarted();
 		_model.addObserver(this);
+		_model2.gameStarted();
+		_model2.addObserver(this);
 }
 
 	public GUI() {
@@ -228,6 +240,7 @@ public class GUI implements Observer {
  */
 	@Override
 	public void update(){
+		if(teamVersion==2) {
 		if(st==true) {
 			try {
 				_model.gameStarted();
@@ -299,7 +312,7 @@ public class GUI implements Observer {
 			b1.setEnabled(true);
 		}}
 		else {
-			JOptionPane.showMessageDialog(null, "Game Started! Red team spymaster please enter a clue and a count number.");
+			JOptionPane.showMessageDialog(null, "2-Team Version Game Started! Red team spymaster please enter a clue and a count number.");
 		}
 		num=num+1;
 		
@@ -339,7 +352,7 @@ public class GUI implements Observer {
 			CountEntered=false;
 		}
 		else if(validCount!=true&&CountEntered){
-			JOptionPane.showMessageDialog(null, "Count number cannot be a string, or less than or equals to zero. Please enter again.");
+			JOptionPane.showMessageDialog(null, "Count number cannot be a string, greater than 6, or less than or equals to zero. Please enter again.");
 			CountEntered=false;
 		}
 		assignPanel.removeAll();
@@ -383,6 +396,176 @@ public class GUI implements Observer {
 		updateJFrameIfNotHeadless();}
 		System.out.println(_model.getRedTotal()+" red");
 		System.out.println(_model.getBlueTotal()+" blue");
+	}
+		else if(teamVersion==3) {
+			if(st==true) {
+				try {
+					_model2.gameStarted();
+					clueP.removeAll();
+					countP.removeAll();
+					clueTF.setEditable(true);
+					countTF.setEditable(true);
+					b.setEnabled(true);
+					b1.setEnabled(true);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				assignPanel.removeAll();
+				ArrayList<String> c = _model2.getcodename();
+				for (int i=0; i<c.size(); i=i+1) {
+					JButton b = new JButton(""+c.get(i));
+					setButtonProperties(b);
+					assignPanel.add(b);
+					b.addActionListener(new codenameButtonHandler2(_model2,this,c.get(i)));
+				}
+				st=false;
+				num=0;
+				assig2=false;
+				validClue=false;
+				validCount=false;
+				ClueEntered=false;
+				CountEntered=false;
+				updateCount=false;
+			}
+			if(_model2.getBlueTotal()==0 || _model2.getRedTotal()==0|| _model2.getGreenTotal()==0||_model2.assassinTotal==0) {
+				if(_model2.winningState()==-1) {
+					assignPanel.removeAll();
+					assignPanel.add(new JLabel("RED TEAM WINS"));
+					}
+				if(_model2.winningState()==1) {
+				assignPanel.removeAll();
+				assignPanel.add(new JLabel("BLUE TEAM WINS"));
+				}
+				if(_model2.winningState()==2) {
+					assignPanel.removeAll();
+					assignPanel.add(new JLabel("GREEN TEAM WINS"));
+					}
+				if(_model2.winningState()==0) {
+					assignPanel.removeAll();
+					assignPanel.add(new JLabel(_model2.teamWon()+""+ " "+ "WINS"));
+				}
+				updateJFrameIfNotHeadless();
+				}else {
+			if(num>0) {
+				if(updateCount) {
+					countP.removeAll();
+					JLabel count=new JLabel(""+_model2.count);
+					setLabelProperties(count);
+					countP.add(count);
+					updateCount=false;
+				}
+			if(turn2!=_model2.turn()){	
+					if(turn2==1) {
+						JOptionPane.showMessageDialog(null, "BLUE TEAM'S TURN ENDS. Green team spymaster please enter a clue and a count number.");
+					}else if(turn2==0) {
+						JOptionPane.showMessageDialog(null, "RED TEAM'S TURN ENDS. Blue team spymaster please enter a clue and a count number.");
+					}else if(turn2==2) {
+						JOptionPane.showMessageDialog(null, "GREEN TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
+						
+					}
+				countP.removeAll();
+				clueP.removeAll();
+				clueTF.setEditable(true);
+				countTF.setEditable(true);
+				b.setEnabled(true);
+				b1.setEnabled(true);
+			}}
+			else {
+				JOptionPane.showMessageDialog(null, "3-Team Version Game Started! Red team spymaster please enter a clue and a count number.");
+			}
+			num=num+1;
+			if(_model2.turn()==0) {
+				top.removeAll();
+				top.add(new JLabel("Red Turn"));
+				turn2=_model2.turn();
+			}
+			else if(_model2.turn()==1){
+				top.removeAll();
+				top.add(new JLabel("Blue Turn"));
+				turn2=_model2.turn();
+			}
+			else if(_model2.turn()==2){
+				top.removeAll();
+				top.add(new JLabel("Green Turn"));
+				turn2=_model2.turn();
+			}
+			if(validClue&&ClueEntered) {
+				clueP.removeAll();
+				JLabel clue=new JLabel(clueTF.getText());
+				setLabelProperties(clue);
+				clueP.add(clue);
+				clueTF.setText("");
+				clueTF.setEditable(false);
+				b.setEnabled(false);
+				ClueEntered=false;
+			}
+			else if(validClue!=true&&ClueEntered){
+				JOptionPane.showMessageDialog(null, "Clue cannot be a number, more than one word, or codenames that is not revealed. Please enter again.");
+				ClueEntered=false;
+			}
+			if(validCount&&CountEntered) {
+				countP.removeAll();
+				JLabel count=new JLabel(countTF.getText());
+				_model2.count=Integer.parseInt(countTF.getText());
+				setLabelProperties(count);
+				countP.add(count);
+				countTF.setText("");
+				countTF.setEditable(false);
+				b1.setEnabled(false);
+				CountEntered=false;
+			}
+			else if(validCount!=true&&CountEntered){
+				JOptionPane.showMessageDialog(null, "Count number cannot be a string, or less than or equals to zero. Please enter again.");
+				CountEntered=false;
+			}
+			assignPanel.removeAll();
+			ArrayList<String> codenames = _model2.getcodename();
+			if(clueP.getComponentCount()==0||countP.getComponentCount()==0) {
+				for (int i=0; i<codenames.size(); i=i+1) {
+					JLabel b = new JLabel(""+codenames.get(i));
+					setLabelProperties(b);
+					if(_model2.getAssignedCodeNameandValues().get(codenames.get(i))=="red agent") {
+							b.setBackground(Color.RED);
+						}
+					if(_model2.getAssignedCodeNameandValues().get(codenames.get(i))=="blue agent") {
+							b.setBackground(Color.BLUE);
+						}
+					if(_model2.getAssignedCodeNameandValues().get(codenames.get(i))=="green agent") {
+						b.setBackground(Color.GREEN);
+					}
+					if(_model2.getAssignedCodeNameandValues().get(codenames.get(i))=="assassin") {
+							b.setBackground(Color.DARK_GRAY);
+						}
+					if(_model2.getReveal().get(codenames.get(i))==true) {
+							JLabel label = new JLabel(""+_model2.getAssignedCodeNameandValues().get(codenames.get(i)));
+							setLabelProperties(label);
+							assignPanel.add(label);
+						}else {
+							assignPanel.add(b);
+						}
+			}
+				}
+			else {
+			for (int i=0; i<codenames.size(); i=i+1) {
+				JButton b = new JButton(""+codenames.get(i));
+				setButtonProperties(b);
+				if(_model2.getReveal().get(codenames.get(i))==true) {
+					JLabel label = new JLabel(""+_model2.getAssignedCodeNameandValues().get(codenames.get(i)));
+					setLabelProperties(label);
+					assignPanel.add(label);
+				}
+				else {
+				assignPanel.add(b);
+				b.addActionListener(new codenameButtonHandler2(_model2,this,codenames.get(i)));
+				}
+			}}
+			updateJFrameIfNotHeadless();}
+		}
+		
 	}
 /*
  * Updates the JFrame so changes are displayed.

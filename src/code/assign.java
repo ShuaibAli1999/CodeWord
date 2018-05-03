@@ -263,7 +263,7 @@ public class assign {
 	
 	public boolean count(int countnum) throws InvalidCountException{
 		boolean legal=true;
-		if(countnum<0||countnum==0) {
+		if(countnum<0||countnum==0||countnum>6) {
 			throw new InvalidCountException();
 		}
 		this.count=countnum;

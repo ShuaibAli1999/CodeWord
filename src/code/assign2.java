@@ -25,7 +25,7 @@ public class assign2 {
 	/**
 	 * the font of the words in GUI
 	 */
-	public int font =20;
+	public int font =20; 
 	/**
 	 * the arraylist of codenames to be assigned to a location instance
 	 */
@@ -65,7 +65,11 @@ public class assign2 {
 	 */
 	public int blueTotal;
 	
-	public int greenTotal;
+	public int greenTotal; 
+	public int assassinTotal;
+	public boolean RRA=false;//red reveal assassin
+	public boolean BRA=false;//blue
+	public boolean GRA=false;//green
 	/**
 	 * creates a matrix for all the codenames
 	 */
@@ -85,6 +89,7 @@ public class assign2 {
 		count2red = 0;
 		count2blue = 0;
 		count2green = 0;
+		assassinTotal=2;
 		board = new Location[5][5];
 		_observers=new ArrayList<>();
 	}
@@ -137,6 +142,9 @@ public class assign2 {
 		redTotal = 6;
 		blueTotal = 5;
 		greenTotal = 5;
+		RRA=false;
+		BRA=false;
+		GRA=false;
 		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
@@ -230,6 +238,17 @@ public class assign2 {
 			changeTurn();
 			return false;
 		}
+		if(assignedCodeName.get(theLocation.getName())=="assassin"&&assassinTotal<2) {
+			if(turn()==0) {
+				RRA=true;
+			}else if(turn()==1) {
+				BRA=true;
+			}else if(turn()==2) {
+				GRA=true;
+			}
+			changeTurn();
+			return false;
+		}	
 		}
 		changeTurn();
 		return false;
@@ -261,19 +280,40 @@ public class assign2 {
 	 * @return return an int of either 1 or 0
 	 */
 	public int turn() {//showing who's turn
-		
 		return turnCount;
 	}
 	public void changeTurn() {
 		if(turnCount==2) {
-			turnCount =0;
-			
+			turnCount =0;		
 		}
 		else {
 			turnCount++;
 		}
 	}
-	
+	public int  getTurnAssassinRevealed(int x) {
+		if(RRA==true) {
+			if(x==0||x==2) {
+				x=1;
+			}else if(x==1) {
+				x=2;
+			}
+		}
+		if(BRA==true) {
+			if(x==1||x==2) {
+				x=0;
+			}else if(x==0) {
+				x=2;
+			}
+		}
+		if(GRA==true) {
+			if(x==0||x==2) {
+				x=1;
+			}else if(x==1) {
+				x=0;
+			}
+		}
+		return x;
+	}
 	/**
 	 * Passing in a clue as string, which in clue one word and a number that separated by comma.
 	 * Split the string by comma. The clue will be legal if the clue does not include word same as 
@@ -305,7 +345,7 @@ public class assign2 {
 	
 	public boolean count(int countnum) throws InvalidCountException{
 		boolean legal=true;
-		if(countnum<0||countnum==0) {
+		if(countnum<0||countnum==0||countnum>6) {
 			throw new InvalidCountException();
 		}
 		this.count=countnum;
@@ -361,21 +401,31 @@ public class assign2 {
 		int playerTurn = turn();// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
 		int count1blue = 0;
 		int count1red = 0;
+		int count1green=0;
+		int count1assassin=0;
 		for(String code: Reveal.keySet()) {
 			if(Reveal.get(code)) {//iteration through hashmap to see which code names are associated with a true value
 				if(assignedCodeName.get(code)=="assassin") { // iteration through hashmap to see which role is associated with revealed code name 
-					return 0; //return 0 means turn needs to be checked to find winner
+					count1assassin++;		
+					if(count1assassin==2) {
+					return 0; }//return 0 means turn needs to be checked to find winner
 				}
 				if(assignedCodeName.get(code)=="blue agent") {
 					count1blue++;
-					if(count1blue==8) {
+					if(count1blue==5) {
 						return 1;//return 1 means game is in winning state and blue wins
 					}
 				}
 				if(assignedCodeName.get(code)=="red agent") {
 					count1red++;
-					if(count1red==9) {
+					if(count1red==6) {
 						return -1;// return -1 means game is in winning state and red wins
+					}
+				}
+				if(assignedCodeName.get(code)=="green agent") {
+					count1green++;
+					if(count1green==5) {
+						return 2;//return 1 means game is in winning state and blue wins
 					}
 				}
 			}
@@ -398,11 +448,14 @@ public class assign2 {
 	 */
 	public String teamWon() {
 		if(winningState()==0) {
-			if(turnCount%2==1) {
+			if(RRA==false) {
 				return "RED TEAM";
 			}
-			if(turnCount%2==0) {
+			if(BRA==false) {
 				return "BLUE TEAM";
+			}
+			if(GRA==false) {
+				return "GREEN TEAM";
 			}
 		}
 		return null;

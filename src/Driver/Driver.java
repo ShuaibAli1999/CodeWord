@@ -16,8 +16,9 @@ public class Driver implements Runnable {
 	private assign2 _model2;
 	private JFrame _window;
 	private JPanel _mainPanel;
-	public Driver(assign m) {
+	public Driver(assign m,assign2 m2) {
 		_model = m;
+		_model2= m2;
 	}
 	public JFrame getwindow() {
 		return _window;
@@ -25,7 +26,8 @@ public class Driver implements Runnable {
 	
 	public static void main(String[] args) {
 		assign m = new assign( );
-		SwingUtilities.invokeLater(new Driver(m));
+		assign2 m2=new assign2();
+		SwingUtilities.invokeLater(new Driver(m,m2));
 	}
 
 	@Override

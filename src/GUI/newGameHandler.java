@@ -16,7 +16,7 @@ public class newGameHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		gui.st=true;
-		gui.update();
+		gui.update(); 
 	}
 
 }

@@ -3,16 +3,12 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
+import code.assign2;
 
-import code.assign;
-/*
- * Handles the clue button, and checking whether there is one word or more, and updating boolean value in GUI.
- */
-public class clueButtonHandler implements ActionListener{
+public class clueButtonHandler2 implements ActionListener{
 	private GUI gui;
-	private assign a;
-	public clueButtonHandler(GUI gui,assign assi) {
+	private assign2 a;
+	public clueButtonHandler2(GUI gui,assign2 assi) {
 		this.gui=gui;
 		this.a=assi;
 	}
@@ -40,5 +36,4 @@ public class clueButtonHandler implements ActionListener{
 		}
 		gui.update();
 	}
-
 }
