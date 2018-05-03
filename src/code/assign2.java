@@ -81,7 +81,7 @@ public class assign2 {
 		greenTotal=5;
 		codenames =new ArrayList<String>();
 		person =  new ArrayList<String>();
-		turnCount =  1;
+		turnCount =  0;
 		count2red = 0;
 		count2blue = 0;
 		count2green = 0;
@@ -133,7 +133,7 @@ public class assign2 {
 	public void gameStarted() throws FileNotFoundException, IOException{//set up for the game.
 		CodenamesList cod = new CodenamesList();
 		PersonAssignments2 per=new PersonAssignments2();
-		turnCount=1;//red team's turn
+		turnCount=0;//red team's turn
 		redTotal = 6;
 		blueTotal = 5;
 		greenTotal = 5;
@@ -157,7 +157,7 @@ public class assign2 {
 			assign.put(codename.get(i),person.get(i));
 		}
 		assignedCodeName=assign;
-		
+
 		for(String y:codename) {
 			Reveal.put(y, false); //false means that the codenames is not reveal.
 		}	
@@ -171,7 +171,7 @@ public class assign2 {
 	public boolean updateLocation(Location theLocation) {
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
 		if(count>0) {
-		if(turnCount%2!= 0) {//if it is reds turn
+		if(turn()==0) {//if it is reds turn
 		if(assignedCodeName.get(theLocation.getName())=="red agent") {
 			count--;
 			redTotal--;//decrement total red agents
@@ -180,11 +180,16 @@ public class assign2 {
 		else if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 			blueTotal--;//decrement total blue agents
 			//turn count should be changed here probably 
-			turnCount++;
+			changeTurn();
+			return false;
+		}
+		else if(assignedCodeName.get(theLocation.getName())=="green agent") {
+			greenTotal--;
+			changeTurn();
 			return false;
 		}
 		}
-		if(turnCount%2== 0) {
+		if(turn()==1) {//if its blue turn
 			if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 				count--;
 				blueTotal--;
@@ -193,16 +198,40 @@ public class assign2 {
 			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
 				redTotal--;
 				//turn count should be changed here probably 
-				turnCount++;
+				changeTurn();
+				return false;
+			}
+			else if(assignedCodeName.get(theLocation.getName())=="green agent") {
+				greenTotal--;
+				changeTurn();
 				return false;
 			}
 		}
+		if(turn()==2) {
+			if(assignedCodeName.get(theLocation.getName())=="green agent") {
+				count--;
+				greenTotal--;
+				return true;
+			}
+			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
+				redTotal--;
+				//turn count should be changed here probably 
+				changeTurn();
+				return false;
+			}
+			else if(assignedCodeName.get(theLocation.getName())=="blue agent") {
+				blueTotal--;
+				changeTurn();
+				return false;
+			}
+			
+		}
 		if(assignedCodeName.get(theLocation.getName())=="innocent bystander") {
-			turnCount++;
+			changeTurn();
 			return false;
 		}
 		}
-		turnCount++;
+		changeTurn();
 		return false;
 		
 	}
@@ -232,11 +261,17 @@ public class assign2 {
 	 * @return return an int of either 1 or 0
 	 */
 	public int turn() {//showing who's turn
-		int num=turnCount%2;
-		return num;
+		
+		return turnCount;
 	}
 	public void changeTurn() {
-		turnCount++;
+		if(turnCount==2) {
+			turnCount =0;
+			
+		}
+		else {
+			turnCount++;
+		}
 	}
 	
 	/**
@@ -315,12 +350,15 @@ public class assign2 {
 	public int getBlueTotal() {
 		return blueTotal;
 	}
+	public int getGreenTotal() {
+		return greenTotal;
+	}
 	/**
 	 * checkes to see if the board is in a winning state
 	 * @return an int that describes the type of winning state the board is in
 	 */
 	public int winningState() {
-		int playerTurn = turnCount%2;// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
+		int playerTurn = turn();// if player turn equals 1 it is red's turn. if player turn equals 0 it is blue's turn
 		int count1blue = 0;
 		int count1red = 0;
 		for(String code: Reveal.keySet()) {
@@ -343,10 +381,10 @@ public class assign2 {
 			}
 		}
 		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
-				turnCount++;
+				changeTurn();
 			}
 			if(playerTurn==0 && count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
-				turnCount++;
+				changeTurn();
 			}
 			count2red = count1red;
 			count2blue = count1blue;
