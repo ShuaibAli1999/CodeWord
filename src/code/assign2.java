@@ -318,6 +318,7 @@ public class assign2 {
 		if(aClue=="") {
 			return false;
 		}
+		aClue.toUpperCase();
 		boolean legal=true;
 			for(String c:Reveal.keySet()) {
 				if(aClue.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
@@ -327,8 +328,8 @@ public class assign2 {
 					this.count=-1;
 					return false;
 				}
-				if(aClue.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
-					legal=true;
+				if(aClue.contains(c)) {
+					return false;
 				}
 		}
 		return legal;
@@ -421,21 +422,10 @@ public class assign2 {
 				}
 			}
 		}
-		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
-				changeTurn();
-			}
-			if(playerTurn!=1&& count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
-				changeTurn();
-			}
-			if(playerTurn!=2&&count1green==count2green) {
-				changeTurn();
-			}
-			if(count1assassin!=assassinTotal) {
-				assassinTotal=count1assassin;
-			}
+			assassinTotal=count1assassin;
 			count2red = count1red;
 			count2blue = count1blue;
-			count2blue=count1blue;
+			count2green=count1green;
 		return 10;//means board not in game winning state
 	}
 	
@@ -482,6 +472,6 @@ public class assign2 {
 			obs.update();
 		}
 	}
-	
+
 	}
 	

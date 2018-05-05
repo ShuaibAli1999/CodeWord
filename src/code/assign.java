@@ -245,6 +245,7 @@ public class assign {
 		if(aClue=="") {
 			return false;
 		}
+		aClue.toUpperCase();
 		boolean legal=true;
 			for(String c:Reveal.keySet()) {
 				if(aClue.equals(c)&&Reveal.get(c)) {//if the clue has words that same as the code name that is revealed then is fine.
@@ -254,8 +255,8 @@ public class assign {
 					this.count=-1;
 					return false;
 				}
-				if(aClue.equals(c)==false) {//if clue doesn't have words same as codename, then it is legal.
-					legal=true;
+				if(aClue.contains(c)) {
+					return false;
 				}
 		}
 		return legal;
@@ -263,7 +264,7 @@ public class assign {
 	
 	public boolean count(int countnum) throws InvalidCountException{
 		boolean legal=true;
-		if(countnum<0||countnum==0||countnum>6) {
+		if(countnum<0||countnum==0||countnum>9) {
 			throw new InvalidCountException();
 		}
 		this.count=countnum;
@@ -335,12 +336,7 @@ public class assign {
 				}
 			}
 		}
-		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
-				turnCount++;
-			}
-			if(playerTurn==0 && count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
-				turnCount++;
-			}
+
 			count2red = count1red;
 			count2blue = count1blue;
 		return 10;//means board not in game winning state

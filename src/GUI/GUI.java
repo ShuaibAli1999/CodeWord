@@ -162,7 +162,7 @@ public class GUI implements Observer {
 		b.addActionListener(new clueButtonHandler(this,_model));
 		countTF= new JTextField("Enter one number for count",20);
 		b1=new JButton("Ok");
-		b1.addActionListener(new countButtonHandler(this,_model));
+		b1.addActionListener(new countButtonHandler(this,_model,_model2));
 		enterP.add(clueTF);
 		enterP.add(b);
 		enterP.add(countTF);
@@ -271,6 +271,13 @@ public class GUI implements Observer {
 				countTF.setEditable(true);
 				b.setEnabled(true);
 				b1.setEnabled(true);
+				enterP.removeAll();
+				enterP.add(clueTF);
+				b=new JButton("Ok");
+				b.addActionListener(new clueButtonHandler(this,_model));
+				enterP.add(b);
+				enterP.add(countTF);
+				enterP.add(b1);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -426,6 +433,13 @@ public class GUI implements Observer {
 					countTF.setEditable(true);
 					b.setEnabled(true);
 					b1.setEnabled(true);
+					enterP.removeAll();
+					enterP.add(clueTF);
+					b=new JButton("Ok");
+					b.addActionListener(new clueButtonHandler2(this,_model2));
+					enterP.add(b);
+					enterP.add(countTF);
+					enterP.add(b1);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

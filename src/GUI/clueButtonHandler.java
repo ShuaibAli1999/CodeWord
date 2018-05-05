@@ -22,8 +22,8 @@ public class clueButtonHandler implements ActionListener{
 		String[] y=u.split("[a-zA-Z]+");
 		if(y.length==0) {
 			try {
-				 Integer.parseInt(gui.clueTF.getText());
-				 gui.validClue=false;
+				Integer.parseInt(gui.clueTF.getText());
+				gui.validClue=false;
 				gui.ClueEntered=true;
 				} catch (NumberFormatException e) {
 					String w=u.toUpperCase();
