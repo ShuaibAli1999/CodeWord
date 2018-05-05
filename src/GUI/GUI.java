@@ -483,7 +483,6 @@ public class GUI implements Observer {
 						JOptionPane.showMessageDialog(null, "RED TEAM'S TURN ENDS. Blue team spymaster please enter a clue and a count number.");
 					}else if(turn2==2) {
 						JOptionPane.showMessageDialog(null, "GREEN TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
-						
 					}
 				countP.removeAll();
 				clueP.removeAll();

@@ -285,35 +285,25 @@ public class assign2 {
 	}
 	public void changeTurn() {
 		if(turnCount==2) {
-			turnCount =0;		
+			turnCount=0;		
 		}
-		else {
 			turnCount++;
-		}
-	}
-	public int  getTurnAssassinRevealed(int x) {
-		if(RRA==true) {
-			if(x==0||x==2) {
-				x=1;
-			}else if(x==1) {
-				x=2;
-			}
-		}
 		if(BRA==true) {
-			if(x==1||x==2) {
-				x=0;
-			}else if(x==0) {
-				x=2;
+			if(turnCount==1) {
+				turnCount=2;
 			}
+		}
+		if(RRA==true) {
+			if(turnCount==0) {
+				turnCount=1;
+			}
+			
 		}
 		if(GRA==true) {
-			if(x==0||x==2) {
-				x=1;
-			}else if(x==1) {
-				x=0;
+			if(turnCount==2) {
+				turnCount=0;
 			}
 		}
-		return x;
 	}
 	/**
 	 * Passing in a clue as string, which in clue one word and a number that separated by comma.
@@ -431,13 +421,13 @@ public class assign2 {
 				}
 			}
 		}
-		if(playerTurn!=0 && count1red!=count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
+		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
 				changeTurn();
 			}
-			if(playerTurn!=1&& count1blue!=count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
+			if(playerTurn!=1&& count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
 				changeTurn();
 			}
-			if(playerTurn!=2&&count1blue!=count2blue) {
+			if(playerTurn!=2&&count1green==count2green) {
 				changeTurn();
 			}
 			if(count1assassin!=assassinTotal) {
