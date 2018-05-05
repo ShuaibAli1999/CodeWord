@@ -66,10 +66,11 @@ assignmentTest()
 Method defined which correctly returns whether or not the Board is in one of the winning states [5 points]
 assign2.java
 winningState()
-WinningStateTest.java
+WinningStateTestFor3Teamversion.java
 test1()
 test2()
 test3()
+test6()
 
 Method defined which correctly returns which team wins once the 2nd Assassin is revealed [8 points]
 assign2.java
