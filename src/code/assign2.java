@@ -178,6 +178,11 @@ public class assign2 {
 	 * @return the boolean value true or false - false meaning the turn ends and the other team goes, true meaning the turn continues and the count is decremented
 	 */
 	public boolean updateLocation(Location theLocation) {
+		if(RRA) {redTotal=-1;}
+		if(BRA) {blueTotal=-1;}
+		if(GRA) {greenTotal=-1;}
+			
+		
 		Reveal.put(theLocation.getName(), true); //set the code name related to the location to revealed
 		if(count>0) {
 		if(turn()==0) {//if it is reds turn
@@ -199,15 +204,18 @@ public class assign2 {
 		}
 		}
 		if(turn()==1) {//if its blue turn
+			
 			if(assignedCodeName.get(theLocation.getName())=="blue agent") {
 				count--;
 				blueTotal--;
 				return true;
 			}
 			else if(assignedCodeName.get(theLocation.getName())=="red agent") {
+				
 				redTotal--;
 				//turn count should be changed here probably 
 				changeTurn();
+				
 				return false;
 			}
 			else if(assignedCodeName.get(theLocation.getName())=="green agent") {
