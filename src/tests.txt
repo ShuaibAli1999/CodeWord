@@ -57,3 +57,28 @@ teamWon()
 TeamWonTest.java
 teamWonTest()
 teamWonTestIfNotRevealed()
+
+Creates a List containing randomly generated assignments for each of the 6 Red Agents, 5 Blue Agents, 5 Green Agents, 7 Innocent Bystanders, and 2 Assassins [3 points]
+PersonAssignment2.java
+ListTest()
+assignmentTest()
+
+Method defined which correctly returns whether or not the Board is in one of the winning states [5 points]
+assign2.java
+winningState()
+WinningStateTest.java
+test1()
+test2()
+test3()
+
+Method defined which correctly returns which team wins once the 2nd Assassin is revealed [8 points]
+assign2.java
+teamWon()
+test1()
+
+Method which returns which is used at the end of a turn to determine the team whose move is next (this must include the possibility that the next team in the 3-team rotation had previously Revealed an Assassin) [7 points]
+assign.java
+changeTurn()
+ChangeTurnTest.java
+test1()
+
