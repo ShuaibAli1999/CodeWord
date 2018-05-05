@@ -38,6 +38,10 @@ public class GUI implements Observer {
 	 */
 	private JFrame secondFrame = new JFrame("My 2nd Window!");
 	/*
+	 * The window that holds easter egg.
+	 */
+	private JFrame thirdFrame = new JFrame("Hell Mode");
+	/*
 	 * The class that hold and keep trace of all the data information of the game. 
 	 */
 	private assign _model;
@@ -206,6 +210,22 @@ public class GUI implements Observer {
 			secondFrame.addWindowListener(new memeMagicHandler());	
 		}});
 		menu.add(fun);
+		JMenuItem fun2=new JMenuItem("Hell Mode");
+		fun2.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JPanel p=new JPanel();
+				p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+				p.add(new JLabel("Loading..."));
+				p.setBackground(Color.BLUE);
+				thirdFrame.add(p);
+				thirdFrame.setAlwaysOnTop(true);
+				thirdFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				thirdFrame.setVisible(true);
+				thirdFrame.addWindowListener(new memeMagicHandler2());
+			}
+		});
+		menu.add(fun2);
 		
 		JMenuItem menuItem1 = new JMenuItem("Exit");
 		menuItem1.addActionListener(new newCloseProgramHandler());
