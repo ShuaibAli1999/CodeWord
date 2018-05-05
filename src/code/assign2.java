@@ -403,19 +403,19 @@ public class assign2 {
 				}
 				if(assignedCodeName.get(code)=="blue agent") {
 					count1blue++;
-					if(count1blue==5) {
+					if(count1blue==5&&BRA==false) {
 						return 1;//return 1 means game is in winning state and blue wins
 					}
 				}
 				if(assignedCodeName.get(code)=="red agent") {
 					count1red++;
-					if(count1red==6) {
+					if(count1red==6&&RRA==false) {
 						return -1;// return -1 means game is in winning state and red wins
 					}
 				}
 				if(assignedCodeName.get(code)=="green agent") {
 					count1green++;
-					if(count1green==5) {
+					if(count1green==5&&GRA==false) {
 						return 2;//return 2 means game is in winning state and green wins
 					}
 				}
