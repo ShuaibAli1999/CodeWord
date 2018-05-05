@@ -75,7 +75,12 @@ test6()
 Method defined which correctly returns which team wins once the 2nd Assassin is revealed [8 points]
 assign2.java
 teamWon()
-test1()
+TeamWonTest2.java
+teamWonTest()
+teamWonTest2()
+teamWonTest3()
+teamWonTestIfNotRevealed()
+
 
 Method which returns which is used at the end of a turn to determine the team whose move is next (this must include the possibility that the next team in the 3-team rotation had previously Revealed an Assassin) [7 points]
 assign.java
