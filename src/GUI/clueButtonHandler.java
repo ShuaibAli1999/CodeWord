@@ -18,15 +18,16 @@ public class clueButtonHandler implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String[] x=gui.clueTF.getText().split(" ");
-		if(x.length==1) {
+		String u=gui.clueTF.getText();
+		String[] y=u.split("[a-zA-Z]+");
+		if(y.length==0) {
 			try {
-				  int n = Integer.parseInt(gui.clueTF.getText());
-				  gui.validClue=false;
+				 Integer.parseInt(gui.clueTF.getText());
+				 gui.validClue=false;
 				gui.ClueEntered=true;
 				} catch (NumberFormatException e) {
-					String y=gui.clueTF.getText().toUpperCase();
-					if(a.clue(y)) {
+					String w=u.toUpperCase();
+					if(a.clue(w)) {
 						gui.validClue=true;
 						gui.ClueEntered=true;
 					}else {
@@ -40,5 +41,4 @@ public class clueButtonHandler implements ActionListener{
 		}
 		gui.update();
 	}
-
 }

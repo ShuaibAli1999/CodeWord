@@ -478,12 +478,21 @@ public class GUI implements Observer {
 				}
 			if(turn2!=_model2.turn()){	
 					if(turn2==1) {
+						if(_model2.GRA) {
+							JOptionPane.showMessageDialog(null, "BLUE TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
+						}else {
 						JOptionPane.showMessageDialog(null, "BLUE TEAM'S TURN ENDS. Green team spymaster please enter a clue and a count number.");
-					}else if(turn2==0) {
+						}}else if(turn2==0) {
+							if(_model2.BRA) {
+								JOptionPane.showMessageDialog(null, "RED TEAM'S TURN ENDS. Green team spymaster please enter a clue and a count number.");
+							}else {
 						JOptionPane.showMessageDialog(null, "RED TEAM'S TURN ENDS. Blue team spymaster please enter a clue and a count number.");
-					}else if(turn2==2) {
+							}}else if(turn2==2) {
+								if(_model2.RRA) {
+									JOptionPane.showMessageDialog(null, "GREEN TEAM'S TURN ENDS. Blue team spymaster please enter a clue and a count number.");
+								}else {
 						JOptionPane.showMessageDialog(null, "GREEN TEAM'S TURN ENDS. Red team spymaster please enter a clue and a count number.");
-					}
+					}}
 				countP.removeAll();
 				clueP.removeAll();
 				clueTF.setEditable(true);
