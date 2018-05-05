@@ -1,3 +1,6 @@
+
+
+
 package GUI;
 import java.awt.Color;
 import java.awt.Font;
@@ -140,8 +143,6 @@ public class GUI implements Observer {
 	 */
 	protected int num=0;
 	protected int teamVersion=2;
-	private int teamV=2;
-	protected boolean assig2=false;
 	/*
 	 * sets up the initial framework for the GUI. Adds the JText fields, JPanels, and JButtons necessary for the game to function.
 	 * Update handles further changes.
@@ -442,7 +443,6 @@ public class GUI implements Observer {
 //				}
 				st=false;
 				num=0;
-				assig2=false;
 				validClue=false;
 				validCount=false;
 				ClueEntered=false;
@@ -492,7 +492,6 @@ public class GUI implements Observer {
 				b1.setEnabled(true);
 			}}
 			else {
-				System.out.println(2);
 				JOptionPane.showMessageDialog(null, "3-Team Version Game Started! Red team spymaster please enter a clue and a count number.");
 			}
 			num=num+1;
@@ -541,7 +540,6 @@ public class GUI implements Observer {
 				CountEntered=false;
 			}
 			assignPanel.removeAll();
-			System.out.println(1);
 			ArrayList<String> codenames = _model2.getcodename();
 			if(clueP.getComponentCount()==0||countP.getComponentCount()==0) {
 				for (int i=0; i<codenames.size(); i=i+1) {
@@ -582,6 +580,7 @@ public class GUI implements Observer {
 				b.addActionListener(new codenameButtonHandler2(_model2,this,codenames.get(i)));
 				}
 			}}
+			System.out.println(_model2.turn());
 			updateJFrameIfNotHeadless();}
 		}
 		

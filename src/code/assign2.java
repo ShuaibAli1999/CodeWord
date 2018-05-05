@@ -239,7 +239,7 @@ public class assign2 {
 			changeTurn();
 			return false;
 		}
-		if(assignedCodeName.get(theLocation.getName())=="assassin"&&assassinTotal<2) {
+		if(assignedCodeName.get(theLocation.getName())=="assassin") {
 			if(turn()==0) {
 				RRA=true;
 			}else if(turn()==1) {
@@ -284,10 +284,10 @@ public class assign2 {
 		return turnCount;
 	}
 	public void changeTurn() {
-		if(turnCount==2) {
-			turnCount=0;		
-		}
 			turnCount++;
+			if(turnCount==3) {
+				turnCount=0;}
+			
 		if(BRA==true) {
 			if(turnCount==1) {
 				turnCount=2;
