@@ -258,13 +258,13 @@ public class GUI implements Observer {
 				e.printStackTrace();
 			}
 			assignPanel.removeAll();
-			ArrayList<String> c = _model.getcodename();
-			for (int i=0; i<c.size(); i=i+1) {
-				JButton b = new JButton(""+c.get(i));
-				setButtonProperties(b);
-				assignPanel.add(b);
-				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
-			}
+//			ArrayList<String> c = _model.getcodename();
+//			for (int i=0; i<c.size(); i=i+1) {
+//				JButton b = new JButton(""+c.get(i));
+//				setButtonProperties(b);
+//				assignPanel.add(b);
+//				b.addActionListener(new codenameButtonHandler(_model,this,c.get(i)));
+//			}
 			st=false;
 			num=0;
 			validClue=false;
@@ -394,12 +394,10 @@ public class GUI implements Observer {
 			}
 		}}
 		updateJFrameIfNotHeadless();}
-		System.out.println(_model.getRedTotal()+" red");
-		System.out.println(_model.getBlueTotal()+" blue");
 	}
 		else if(teamVersion==3) {
 			if(st==true) {
-				try {
+				try{
 					_model2.gameStarted();
 					clueP.removeAll();
 					countP.removeAll();
@@ -415,13 +413,13 @@ public class GUI implements Observer {
 					e.printStackTrace();
 				}
 				assignPanel.removeAll();
-				ArrayList<String> c = _model2.getcodename();
-				for (int i=0; i<c.size(); i=i+1) {
-					JButton b = new JButton(""+c.get(i));
-					setButtonProperties(b);
-					assignPanel.add(b);
-					b.addActionListener(new codenameButtonHandler2(_model2,this,c.get(i)));
-				}
+//				ArrayList<String> c = _model2.getcodename();
+//				for (int i=0; i<c.size(); i=i+1) {
+//					JButton b = new JButton(""+c.get(i));
+//					setButtonProperties(b);
+//					assignPanel.add(b);
+//					b.addActionListener(new codenameButtonHandler2(_model2,this,c.get(i)));
+//				}
 				st=false;
 				num=0;
 				assig2=false;
@@ -475,6 +473,7 @@ public class GUI implements Observer {
 				b1.setEnabled(true);
 			}}
 			else {
+				System.out.println(2);
 				JOptionPane.showMessageDialog(null, "3-Team Version Game Started! Red team spymaster please enter a clue and a count number.");
 			}
 			num=num+1;
@@ -523,6 +522,7 @@ public class GUI implements Observer {
 				CountEntered=false;
 			}
 			assignPanel.removeAll();
+			System.out.println(1);
 			ArrayList<String> codenames = _model2.getcodename();
 			if(clueP.getComponentCount()==0||countP.getComponentCount()==0) {
 				for (int i=0; i<codenames.size(); i=i+1) {

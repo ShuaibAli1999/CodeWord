@@ -32,7 +32,9 @@ public class codenameButtonHandler2 implements ActionListener{
 					if(_m.getAssignedCodeNameandValues().get(codeName).equals("blue agent") && _m.count==0) {
 						_m.blueTotal--;
 					}
-					
+					if(_m.getAssignedCodeNameandValues().get(codeName).equals("green agent") && _m.count==0){
+						_m.greenTotal--;
+					}
 					if(_m.updateLocation(_m.getBoard()[i][j])!=false) {
 						gui.updateCount=true;
 					}					

@@ -145,6 +145,7 @@ public class assign2 {
 		RRA=false;
 		BRA=false;
 		GRA=false;
+		assassinTotal=2;
 		assignedCodeName=new HashMap<String,String>();
 		Reveal=new HashMap<String,Boolean>();// boolean with be true if is revealed, false will be not reveals
 		setCodenames(cod.getList());
@@ -425,19 +426,26 @@ public class assign2 {
 				if(assignedCodeName.get(code)=="green agent") {
 					count1green++;
 					if(count1green==5) {
-						return 2;//return 1 means game is in winning state and blue wins
+						return 2;//return 2 means game is in winning state and green wins
 					}
 				}
 			}
 		}
-		if(playerTurn!=0 && count1red==count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
+		if(playerTurn!=0 && count1red!=count2red) {//checks if when it is red teams turn if 1 more red agent was revealed. If so the turn count is not changed
 				changeTurn();
 			}
-			if(playerTurn==0 && count1blue==count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
+			if(playerTurn!=1&& count1blue!=count2blue) {// checks if when it is blue teams turn if 1 more blue agent was revealed. If so the turn count is not changed
 				changeTurn();
+			}
+			if(playerTurn!=2&&count1blue!=count2blue) {
+				changeTurn();
+			}
+			if(count1assassin!=assassinTotal) {
+				assassinTotal=count1assassin;
 			}
 			count2red = count1red;
 			count2blue = count1blue;
+			count2blue=count1blue;
 		return 10;//means board not in game winning state
 	}
 	
